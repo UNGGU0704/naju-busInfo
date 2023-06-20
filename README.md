@@ -65,10 +65,17 @@
 | **도착 정보 표시** | **전체 정류장 리스트** |
 | <img src="appTests/IMG_5924.PNG" width="200" align="center"> | <img src="appTests/IMG_5926.PNG" width="200" align="center"> |
 
+<img width="69" alt="스크린샷 2023-06-20 오후 11 36 52" src="https://github.com/UNGGU0704/Naju_busInfo/assets/130115689/16bc9a8a-7a9a-465f-929f-0b5c934b83f2">
 
+**일반버스 아이콘입니다.**
 
+ <img width="72" alt="스크린샷 2023-06-20 오후 11 36 55" src="https://github.com/UNGGU0704/Naju_busInfo/assets/130115689/1c51798c-ba76-44d8-81cf-dbb040da5be0"> 
 
+ **광역버스 아이콘입니다.**
 
+<img width="71" alt="스크린샷 2023-06-20 오후 11 36 48" src="https://github.com/UNGGU0704/Naju_busInfo/assets/130115689/caca8c69-22c0-4fef-88a7-dc99568603d7">
+
+**마을버스 아이콘입니다.**
 
 ## 기여(Contributing)
 Contributions are very welcome 🙌 
