@@ -31,7 +31,6 @@ struct Arrival: Codable, Identifiable, Equatable, Hashable {
 
 public struct SearchResultView: View {
     @Binding var busstopName: String    // 버스 이름 변수
-    @State private var selectedArrival: [Arrival] = []
     @State private var isDataLoaded = false
     @State private var busStopNames: [String] = []  // 정류장 이름 배열 추가
     @State private var nextBusStops: [String] = []  // 정류장 이름 배열 추가
@@ -44,23 +43,21 @@ public struct SearchResultView: View {
                 if busStopNames.isEmpty {
                     Text("No bus stops found")
                 } else {
-                    
-                    NavigationStack {
-                        ScrollView{
-                            ForEach(busStopNames.indices, id: \.self) { index in
-                                NavigationLink("정류장 이름: \(busStopNames[index])\n \(nextBusStops[index]) 방향", value: index)
-                                    .simultaneousGesture(TapGesture().onEnded{
-                                        selectedArrival.removeAll()
-                                        fetchData(for: busStopIDs[index])
-                                    }).padding()
-                            }.navigationDestination(for: Int.self){ i in
-                                busInfoResult(infoList: $selectedArrival,busStopName: $busStopNames[i])
-                            }.navigationTitle("검색 결과")
-                            
-                            
+                    List(busStopNames.indices, id: \.self) { index in
+                        NavigationLink(destination: busInfoResult(busStopName: $busStopNames[index], busStopID: $busStopIDs[index], nextBusStop: $nextBusStops[index])){
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("정류장 이름: \(busStopNames[index])")
+                                    .font(.headline)
+                                    .foregroundColor(.blue)
+                                
+                                Text("\(nextBusStops[index]) 방향")
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                                
+                                Divider()
+                            }
                         }
-                    }
-                    
+                    }.navigationTitle("검색결과")
                     
                 }
             } else {
@@ -69,9 +66,9 @@ public struct SearchResultView: View {
         } .onAppear {
             searchBusStopNames(by: busstopName)
         }
-            
         
-    
+        
+        
     }
     
     public func searchBusStopNames(by busName: String) {
@@ -101,57 +98,10 @@ public struct SearchResultView: View {
             print("Error fetching bus stop data: \(error)")
             busStopNames = []
             nextBusStops = []
-            isDataLoaded = true 
+            isDataLoaded = true
         }
     }
     
-    
-    public func fetchData(for busStopID: Int) {
-        
-
-        // Construct the URL for the API request
-        guard var urlComponents = URLComponents(string: "http://121.147.206.212/json/arriveApi") else {
-            print("Invalid URL")
-            return
-        }
-        
-        urlComponents.queryItems = [
-            URLQueryItem(name: "BUSSTOP_ID", value: "\(busStopID)")
-        ]
-        print("API 요청 사이트: " + "\(urlComponents)")
-        guard let url = urlComponents.url else {
-            print("Invalid URL")
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print("Error fetching data: \(error.localizedDescription)")
-                return
-            }
-            
-            guard let data = data else {
-                print("No data received")
-                return
-            }
-            
-            do {
-                let apiResponse = try JSONDecoder().decode(ApiResponse.self, from: data)
-                let decodedArrivals = apiResponse.arriveList
-                
-                DispatchQueue.main.async {
-                    if decodedArrivals.isEmpty {
-                        print("No bus arrivals found for bus stop ID: \(busStopID)")
-                    } else {
-                        self.selectedArrival = decodedArrivals  // 첫 번째 도착 정보를 선택
-                    }
-                }
-            } catch {
-                print("Error decoding JSON data: \(error)")
-            }
-        }.resume()
-        
-    }
 }
 
 

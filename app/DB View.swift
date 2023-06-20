@@ -12,9 +12,9 @@ struct DBView: View {
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Item.busStopID, ascending: true)])
     private var items: FetchedResults<Item>
     @State private var isShowingButtons = false
-
+    
     var busStop: Item = Item()
-
+    
     var body: some View {
         VStack {
             List(items) { busStop in
@@ -37,7 +37,7 @@ struct DBView: View {
             .listStyle(.plain)
             
             if isShowingButtons {
-                Button("데이터 부착 ") {
+                Button("데이터 갱신 ") {
                     // Button 1의 동작
                     print("Button 1 tapped")
                     fetchBusStopData()
@@ -53,11 +53,11 @@ struct DBView: View {
             }
         }
         .navigationBarItems(trailing:
-            Button(action: {
-                isShowingButtons.toggle()
-            }) {
-                Image(systemName: "ellipsis")
-            }
+                                Button(action: {
+            isShowingButtons.toggle()
+        }) {
+            Image(systemName: "ellipsis")
+        }
         )
     }
 }
