@@ -1,16 +1,19 @@
 <p align="center">
-   <img width="200" src="app/Assets.xcassets/AppIcon.appiconset/1024.png" alt="APP Logo">
-</p>
-<p align="center">    ###나주 버스 </p>
+   <img width="200" src="app/Assets.xcassets/AppIcon.appiconset/1024.png" alt="APP Logo"></p>
+   
+# <p align="center"  style="margin-top: -90px;"><b><span style="font-size: 24px;">나주버스</span></b></p>
 <p align="center">
    <a href="https://developer.apple.com/swift/">
       <img src="https://img.shields.io/badge/Swift-5.8-orange.svg?style=flat" alt="Swift 5.8">
    </a>
-   <a href="https://www.apple.com/kr/app-store/">
-      <img src="https://img.shields.io/badge/App%20Store-Download%20on%20App%20Store-blue.svg?style=flat" alt="App Store">
    </a>
    <img src="https://img.shields.io/badge/iOS-16%2B-brightgreen.svg?style=flat" alt="iOS 16+ Compatible">
+   <a href="https://www.apple.com/kr/app-store/">
+      <img src="https://img.shields.io/badge/Available%20on%20App%20Store-9b59b6.svg?style=flat" alt="Available on App Store">
 </p>
+
+
+
 
 
 # 나주 버스(Naju Bus)
@@ -55,15 +58,14 @@
 
 
 ## Usage
-## Usage
-| 사진 | 사진 |
-| --- | --- |
-| ![사진1](https://github.com/UNGGU0704/Naju_busInfo/raw/main/assets/130115689/6227cf8e-8df4-4fed-b4c8-ec5bc75f3ff7.png) | 
-| ![사진2](https://github.com/UNGGU0704/Naju_busInfo/raw/main/assets/130115689/448ffefa-3433-4e73-9130-ef0a34799f40.png) |
-| 제목1 | 제목2 |
-| ![사진3](https://github.com/UNGGU0704/Naju_busInfo/raw/main/assets/130115689/b01aafbf-a63f-488e-a617-a36171772b20.png) |
-| ![사진4](https://github.com/UNGGU0704/Naju_busInfo/raw/main/assets/130115689/84af66cf-bed0-40ab-81c8-aa49af708ef5.png) |
-| 제목3 | 제목4 |
+
+| 메인화면 | 정류장 검색 표시 |
+| :---: | :---: |
+| <img src="appTests/IMG_5918.PNG" width="200" align="center"> | <img src="appTests/IMG_5923.PNG" width="200" align="center"> |
+| **도착 정보 표시** | **전체 정류장 리스트** |
+| <img src="appTests/IMG_5924.PNG" width="200" align="center"> | <img src="appTests/IMG_5926.PNG" width="200" align="center"> |
+
+
 
 
 
@@ -71,9 +73,10 @@
 
 
 ## Contributing
-Contributions are very welcome 🙌 \n
+Contributions are very welcome 🙌 
+
 기여는 누구나 환영입니다. 🙌
 
 
-## Contributing
+## License
 누구나 활용 가능합니다.
