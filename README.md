@@ -51,13 +51,13 @@
 #### app.xcdatamodeld
 - CoreData의 저장소입니다.
 
-## Installation
+## 설치(Installation)
 
 앱스토어에 등록 예정입니다.
 현재 IPhone12(IOS16.5) 환경에서 정상 테스트 완료했습니다.
 
 
-## Usage
+## 사용(Usage)
 
 | 메인화면 | 정류장 검색 표시 |
 | :---: | :---: |
@@ -70,9 +70,7 @@
 
 
 
-
-
-## Contributing
+## 기여(Contributing)
 Contributions are very welcome 🙌 
 
 기여는 누구나 환영입니다. 🙌
