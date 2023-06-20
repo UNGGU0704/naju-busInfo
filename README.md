@@ -1,7 +1,7 @@
 <p align="center">
    <img width="200" src="app/Assets.xcassets/AppIcon.appiconset/1024.png" alt="APP Logo">
 </p>
-
+<p align="center">    ###나주 버스 </p>
 <p align="center">
    <a href="https://developer.apple.com/swift/">
       <img src="https://img.shields.io/badge/Swift-5.8-orange.svg?style=flat" alt="Swift 5.8">
@@ -45,20 +45,25 @@
   DB.swift의 생성 삭제 기능을 제어합니다.
 #### PersistenceController.swift
 - CoreData를 설정하고 영구 저장소를 로드합니다.
-#### app
+#### app.xcdatamodeld
 - CoreData의 저장소입니다.
 
 ## Installation
 
 앱스토어에 등록 예정입니다.
+현재 IPhone12(IOS16.5) 환경에서 정상 테스트 완료했습니다.
+
 
 ## Usage
-| 사진 | 제목 |
+## Usage
+| 사진 | 사진 |
 | --- | --- |
-| ![IMG_5918](https://github.com/UNGGU0704/Naju_busInfo/assets/130115689/6227cf8e-8df4-4fed-b4c8-ec5bc75f3ff7) | 메인화면 |
-| ![IMG_5923](https://github.com/UNGGU0704/Naju_busInfo/assets/130115689/448ffefa-3433-4e73-9130-ef0a34799f40) | 정류장 검색 표시 |
-| ![IMG_5924](https://github.com/UNGGU0704/Naju_busInfo/assets/130115689/b01aafbf-a63f-488e-a617-a36171772b20) | 도착 정보 표시 |
-| ![IMG_5926](https://github.com/UNGGU0704/Naju_busInfo/assets/130115689/84af66cf-bed0-40ab-81c8-aa49af708ef5) | 전체 정류장 리스트 |
+| ![사진1](https://github.com/UNGGU0704/Naju_busInfo/raw/main/assets/130115689/6227cf8e-8df4-4fed-b4c8-ec5bc75f3ff7.png) | 
+| ![사진2](https://github.com/UNGGU0704/Naju_busInfo/raw/main/assets/130115689/448ffefa-3433-4e73-9130-ef0a34799f40.png) |
+| 제목1 | 제목2 |
+| ![사진3](https://github.com/UNGGU0704/Naju_busInfo/raw/main/assets/130115689/b01aafbf-a63f-488e-a617-a36171772b20.png) |
+| ![사진4](https://github.com/UNGGU0704/Naju_busInfo/raw/main/assets/130115689/84af66cf-bed0-40ab-81c8-aa49af708ef5.png) |
+| 제목3 | 제목4 |
 
 
 
