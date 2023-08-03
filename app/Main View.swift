@@ -8,6 +8,7 @@ struct appApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+            
                 .environment(\.managedObjectContext,  persistenceController.container.viewContext)
         }
     }
@@ -78,8 +79,8 @@ struct ContentView: View {
                             ForEach(wishList.indices, id: \.self) { index in
                                 let wishItem = wishList[index]
                                 if let name = wishItem.busStopName {
-                                    if let nextNmae = wishItem.nextBusStop {
-                                        NavigationLink(destination: busInfoResult(busStopName: Binding.constant(name), busStopID: Binding.constant(Int(wishItem.busStopID)), nextBusStop: Binding.constant(nextNmae))) {
+                                    if let nextName = wishItem.nextBusStop {
+                                        NavigationLink(destination: busInfoResult(busStopName: name, busStopID: Int(wishItem.busStopID), nextBusStop: nextName)) {
                                             Text(name)
                                         }
                                     } else {

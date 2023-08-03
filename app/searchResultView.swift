@@ -6,13 +6,14 @@ struct busInfoResult: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: WishList.entity(), sortDescriptors: []) var wishList: FetchedResults<WishList>
     @State private var selectedArrival: [Arrival] = []
-    @Binding var busStopName: String
-    @Binding var busStopID:Int
-    @Binding var nextBusStop: String
+    @State private var ID: [Int] = []
+    var busStopName: String
+    var busStopID:Int
+    var nextBusStop: String
     @State private var showAlert: Bool = false
     @State private var alertMessage: String = ""
-    
     @State private var isRotating = false
+    
     var body: some View {
         VStack(alignment: .leading) {
             if selectedArrival.isEmpty {
@@ -38,6 +39,7 @@ struct busInfoResult: View {
                 ) {
                     List(selectedArrival.indices, id: \.self) { index in
                         let lineInfo = selectedArrival[index]
+                
                         
                         HStack(spacing: 16) {
                             if lineInfo.lineName.contains("셔틀")||lineInfo.lineName.contains("우정") || lineInfo.lineName.contains("그린") {
@@ -53,18 +55,19 @@ struct busInfoResult: View {
                                     .font(.title)
                                     .foregroundColor(.blue)
                             }
-                            
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text("\(lineInfo.lineName)번")
-                                    .font(.headline)
-                                
-                                Text("남은 시간: \(lineInfo.remainMin) 분")
-                                    .font(.subheadline)
-                                
-                                Text("도착까지 남은 정류장 갯수: \(lineInfo.remainStop)")
-                                    .font(.subheadline)
-                                
-                                
+                       
+                               
+                            NavigationLink(destination: LineinfoView(LineID: lineInfo.lineID, Linename: lineInfo.lineName, nowbusStopID: busStopID)){
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("\(lineInfo.lineName)번")
+                                        .font(.headline)
+                                    
+                                    Text("남은 시간: \(lineInfo.remainMin) 분")
+                                        .font(.subheadline)
+                                    
+                                    Text("도착까지 남은 정류장 갯수: \(lineInfo.remainStop)")
+                                        .font(.subheadline)                    
+                                }
                             }
                             
                             Spacer()

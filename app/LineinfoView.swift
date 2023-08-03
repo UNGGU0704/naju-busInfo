@@ -95,7 +95,8 @@ struct LineinfoView: View {
                                     }
                                     else if(nowbusStopID == selectedLine[index].busStopID){
                                         Circle()
-                                            .frame(width: 28, height: 15)
+                                            .offset(x: -2)
+                                            .frame(width: 30, height: 15)
                                             .foregroundColor(.red)
                                     }
                                     else{

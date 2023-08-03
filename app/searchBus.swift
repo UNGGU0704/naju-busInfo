@@ -19,13 +19,14 @@ struct Arrival: Codable, Identifiable, Equatable, Hashable {
     let remainStop: Int
     let remainMin: Int
     let busStopName: String
+    let lineID: Int
     
     private enum CodingKeys: String, CodingKey {
         case lineName = "LINE_NAME"
         case remainStop = "REMAIN_STOP"
         case remainMin = "REMAIN_MIN"
         case busStopName = "BUSSTOP_NAME"
-        
+        case lineID = "LINE_ID"
     }
 }
 
@@ -44,7 +45,7 @@ public struct SearchResultView: View {
                     Text("No bus stops found")
                 } else {
                     List(busStopNames.indices, id: \.self) { index in
-                        NavigationLink(destination: busInfoResult(busStopName: $busStopNames[index], busStopID: $busStopIDs[index], nextBusStop: $nextBusStops[index])){
+                        NavigationLink(destination: busInfoResult(busStopName: busStopNames[index], busStopID: busStopIDs[index], nextBusStop: nextBusStops[index])){
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("정류장 이름: \(busStopNames[index])")
                                     .font(.headline)
