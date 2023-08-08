@@ -6,7 +6,6 @@ struct busInfoResult: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: WishList.entity(), sortDescriptors: []) var wishList: FetchedResults<WishList>
     @State private var selectedArrival: [Arrival] = []
-    @State private var ID: [Int] = []
     var busStopName: String
     var busStopID:Int
     var nextBusStop: String
@@ -192,9 +191,4 @@ struct busInfoResult: View {
         }.resume()
         
     }
-    
-    
-    
-    
-    
 }

@@ -52,6 +52,7 @@ struct DBView: View {
                 .padding()
             }
         }
+        .navigationTitle("버스 정류장 목록")
         .navigationBarItems(trailing:
                                 Button(action: {
             isShowingButtons.toggle()

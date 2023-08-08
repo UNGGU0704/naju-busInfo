@@ -18,6 +18,8 @@ struct appApp: App {
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: WishList.entity(), sortDescriptors: []) var wishList: FetchedResults<WishList>
+    @FetchRequest(entity: Item.entity(), sortDescriptors: []) var items: FetchedResults<Item>
+    @State var showAlert = false
     @State private var busstopName = "" // 사용자로부터 입력 받을 버스 이름을 저장하는 상태 변수
     //  @State private var showAlert = false // Alert 표시 여부를 저장하는 상태 변수
     
@@ -95,6 +97,16 @@ struct ContentView: View {
                 }
             }
             
+        }.onAppear {
+            checkForEmptyItems()
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("데이터 없음"),
+                  message: Text("정류장 데이터가 없습니다. 정보를 받아오겠습니까?"),
+                  primaryButton: .default(Text("네"), action: {
+                      fetchBusStopData()
+                  }),
+                  secondaryButton: .cancel())
         }
     }
     func deleteAllWishListItems() {
@@ -109,6 +121,13 @@ struct ContentView: View {
             print("Failed to delete WishList items: \(error)")
         }
     }
+    
+    func checkForEmptyItems() {
+        if items.isEmpty {
+            showAlert = true
+        }
+    }
+
     
 }
 

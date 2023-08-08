@@ -165,7 +165,7 @@ struct LineinfoView: View {
                         // Draw the connecting line with a Path
                         Path { path in
                             if selectedLine.indices.contains(0), selectedLine.indices.contains(selectedLine.count - 1) {
-                                let firstPoint = CGPoint(x: 29, y: 23) // 첫 번째 정류장 위치
+                                let firstPoint = CGPoint(x: 29, y: 0) // 첫 번째 정류장 위치
                                 let lastPoint = CGPoint(x: 29, y: UIScreen.main.bounds.height + 50) // 화면 아래쪽으로 경로를 연결
                                 path.move(to: firstPoint)
                                 path.addLine(to: lastPoint)
@@ -290,4 +290,3 @@ struct LineinfoView: View {
         return selectedLocation.first(where: { $0.busStopID == busStopID })
     }
 }
-
