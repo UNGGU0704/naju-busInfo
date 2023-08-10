@@ -26,9 +26,9 @@
 - [x] ℹ️ 정류장 검색
 - [x] ℹ️ 도착 시간 제공
 - [x] ℹ️ 즐겨 찾기 기능
-- [x] ℹ️ 디자인 개선 
+- [x] ℹ️ 디자인 개선
+- [x] ℹ️ 노선 정보 제공
 - [ ] ℹ️ 다른 언어 지원
-- [ ] ℹ️ 다양한 검색 기능
 
 
 ## 파일(File)
@@ -41,6 +41,9 @@
 #### searchResultView.swift
 - 버스 정류장 이름을 기반으로 CoreData에서 정류장 정보를 검색하고 \n
   해당 정류장의 도착 정보를 표시하는 기능을 가지고 있습니다.
+#### LineinfoView.swift
+- 해당 노선이 지나가는 모든 버스 정류장을 보여줍니다. \n
+  추가적으로 해당 노선이 현재 어디 있는지 또한 보여줍니다.
 #### DB.swift
 - CoreData의 저장, 삭제 기능을 가지고 있습니다.
 #### DB view.swift
@@ -54,7 +57,7 @@
 ## 설치(Installation)
 
 앱스토어에 등록 예정입니다.
-현재 IPhone12(IOS16.5) 환경에서 정상 테스트 완료했습니다.
+현재 iPhone12, iPhone8 환경에서 정상 테스트 완료했습니다.
 
 
 ## 사용(Usage)
@@ -62,8 +65,8 @@
 | 메인화면 | 정류장 검색 표시 |
 | :---: | :---: |
 | <img src="appTests/IMG_5918.PNG" width="200" align="center"> | <img src="appTests/IMG_5923.PNG" width="200" align="center"> |
-| **도착 정보 표시** | **전체 정류장 리스트** |
-| <img src="appTests/IMG_5924.PNG" width="200" align="center"> | <img src="appTests/IMG_5926.PNG" width="200" align="center"> |
+| **도착 정보 표시** | **노선 정보 표시** |
+| <img src="appTests/IMG_5924.PNG" width="200" align="center"> | <img src="appTests/IMG_6934.PNG" width="200" align="center"> |
 
 <img width="69" alt="스크린샷 2023-06-20 오후 11 36 52" src="https://github.com/UNGGU0704/Naju_busInfo/assets/130115689/16bc9a8a-7a9a-465f-929f-0b5c934b83f2">
 
