@@ -58,10 +58,6 @@ https://apps.apple.com/kr/app/나주시-버스/id6459411077
 #### app.xcdatamodeld
 - CoreData의 저장소입니다.
 
-## 설치(Installation)
-
-앱스토어에 등록 예정입니다.
-현재 iPhone12, iPhone8 환경에서 정상 테스트 완료했습니다.
 
 
 ## 사용(Usage)
