@@ -20,7 +20,7 @@ struct BusStop: Codable {
     let longitude: Double
     let nameE: String?
     let latitude: Double
-
+    
     private enum CodingKeys: String, CodingKey {
         case busStopName = "BUSSTOP_NAME"
         case arsID = "ARS_ID"
@@ -45,12 +45,12 @@ struct BusStop: Codable {
 public func deleteExistingData() {
     let context = PersistenceController.shared.container.viewContext
     let request: NSFetchRequest<Item> = Item.fetchRequest()
-
+    
     if let items = try? context.fetch(request) {
         for item in items {
             context.delete(item)
         }
-
+        
         do {
             try context.save()
             context.processPendingChanges()
@@ -66,35 +66,34 @@ public func fetchBusStopData() {
     deleteExistingData()
     let persistenceController = PersistenceController.shared
     let context = persistenceController.container.viewContext
-
+    
     guard let url = URL(string: "http://121.147.206.212/json/stationInfo") else {
         print("Invalid URL")
         return
     }
-
+    
     var coreDataCount: Int {
-        let context = PersistenceController.shared.container.viewContext
         let request: NSFetchRequest<Item> = Item.fetchRequest()
-
+        
         return (try? context.count(for: request)) ?? 0
     }
-
+    
     URLSession.shared.dataTask(with: url) { data, response, error in
         if let error = error {
             print("Error fetching data: \(error.localizedDescription)")
             return
         }
-
+        
         guard let data = data else {
             print("No data received")
             return
         }
-
+        
         context.performAndWait {
             do {
                 let DBapiResponse = try JSONDecoder().decode(DBApiResponse.self, from: data)
                 let busStopData = DBapiResponse.bus_stops
-
+                
                 for busStop in busStopData {
                     let newItem = Item(context: context)
                     newItem.busStopName = busStop.busStopName
@@ -104,7 +103,7 @@ public func fetchBusStopData() {
                     newItem.longitude = busStop.longitude
                     newItem.nameE = busStop.nameE ?? ""
                     newItem.latitude = busStop.latitude
-
+                    
                     do {
                         try context.save()
                     } catch {
