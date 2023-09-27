@@ -1,8 +1,7 @@
 <p align="center">
    <img width="200" src="app/Assets.xcassets/AppIcon.appiconset/1024.png" alt="APP Logo"></p>
    
- # <p align="center"  style="margin-top: -90px;">나주시 버스 </p>
- 
+ # <p align="center">나주시 버스 </p>
 <p align="center">
    <a href="https://developer.apple.com/swift/">
       <img src="https://img.shields.io/badge/Swift-5.8-orange.svg?style=flat" alt="Swift 5.8">
@@ -15,10 +14,8 @@
 </a>
 </p>
 
----
 
-
-# 나주 버스(Naju Bus)
+# 나주시 버스(Najusi Bus)
 나주시 시민들을 위한 버스 도착 정보를 제공하는 어플로써 버스 정류장을 검색하고 버스 도착까지 남은 시간을 알려주는 기능을 제공합니다.
 
 ## App Store
