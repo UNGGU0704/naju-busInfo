@@ -1,26 +1,27 @@
 <p align="center">
    <img width="200" src="app/Assets.xcassets/AppIcon.appiconset/1024.png" alt="APP Logo"></p>
    
-# <p align="center"  style="margin-top: -90px;"><b><span style="font-size: 24px;">나주버스</span></b></p>
+ # <p align="center"  style="margin-top: -90px;">나주시 버스 </p>
+ 
 <p align="center">
    <a href="https://developer.apple.com/swift/">
       <img src="https://img.shields.io/badge/Swift-5.8-orange.svg?style=flat" alt="Swift 5.8">
    </a>
-   </a>
    <img src="https://img.shields.io/badge/iOS-16%2B-brightgreen.svg?style=flat" alt="iOS 16+ Compatible">
-   <a href="[https://www.apple.com/kr/app-store/](https://apps.apple.com/kr/app/나주시-버스/id6459411077)">
-      <img src="https://img.shields.io/badge/Available%20on%20App%20Store-9b59b6.svg?style=flat" alt="Available on App Store">
+
+<br>
+<a href="https://apps.apple.com/kr/app/나주시-버스/id6459411077">
+   <img src="https://www.iphones.ru/wp-content/uploads/2010/08/App_Store_Badge_EN1-560x189.png" alt="나주시 버스" width="200"/>
+</a>
 </p>
 
-
-
+---
 
 
 # 나주 버스(Naju Bus)
-
 나주시 시민들을 위한 버스 도착 정보를 제공하는 어플로써 버스 정류장을 검색하고 버스 도착까지 남은 시간을 알려주는 기능을 제공합니다.
 
-## 다운 링크 (App Store)
+## App Store
 
 https://apps.apple.com/kr/app/나주시-버스/id6459411077
 
