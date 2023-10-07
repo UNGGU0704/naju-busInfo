@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6E1B7DDB2A404CAA001B3406 /* DB View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1B7DDA2A404CAA001B3406 /* DB View.swift */; };
+		6E2CCE0F2A67F1FF00BB996B /* LineinfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2CCE0E2A67F1FF00BB996B /* LineinfoView.swift */; };
 		6E40ABB02A1C60F1009AD3E8 /* Main View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E40ABAF2A1C60F1009AD3E8 /* Main View.swift */; };
-		6E40ABB22A1C60F3009AD3E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E40ABB12A1C60F3009AD3E8 /* Assets.xcassets */; };
 		6E40ABB52A1C60F3009AD3E8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E40ABB42A1C60F3009AD3E8 /* Preview Assets.xcassets */; };
 		6E40ABB72A1C60F3009AD3E8 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E40ABB62A1C60F3009AD3E8 /* Persistence.swift */; };
 		6E40ABBA2A1C60F3009AD3E8 /* app.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E40ABB82A1C60F3009AD3E8 /* app.xcdatamodeld */; };
@@ -18,6 +18,7 @@
 		6E40ABD02A1C60F3009AD3E8 /* appUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E40ABCF2A1C60F3009AD3E8 /* appUITestsLaunchTests.swift */; };
 		6E40ABDD2A1C6211009AD3E8 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E40ABDC2A1C6211009AD3E8 /* DB.swift */; };
 		6E4539AD2A3DDEE1000EFEB3 /* searchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4539AC2A3DDEE1000EFEB3 /* searchResultView.swift */; };
+		6E8778B22A40F9500011DF22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E40ABB12A1C60F3009AD3E8 /* Assets.xcassets */; };
 		6E9218512A288D6300877C36 /* searchBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC8C65E2A2222EF00AE86A2 /* searchBus.swift */; };
 		6E9218522A288D6300877C36 /* searchBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC8C65E2A2222EF00AE86A2 /* searchBus.swift */; };
 		6E9218532A288D7000877C36 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E40ABDC2A1C6211009AD3E8 /* DB.swift */; };
@@ -45,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		6E1B7DDA2A404CAA001B3406 /* DB View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DB View.swift"; sourceTree = "<group>"; };
+		6E2CCE0E2A67F1FF00BB996B /* LineinfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineinfoView.swift; sourceTree = "<group>"; };
 		6E40ABAA2A1C60F1009AD3E8 /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E40ABAF2A1C60F1009AD3E8 /* Main View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Main View.swift"; sourceTree = "<group>"; };
 		6E40ABB12A1C60F3009AD3E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				6ED57FEA2A2705FA004091EF /* BusstopInfo.swift */,
 				6E4539AC2A3DDEE1000EFEB3 /* searchResultView.swift */,
 				6E1B7DDA2A404CAA001B3406 /* DB View.swift */,
+				6E2CCE0E2A67F1FF00BB996B /* LineinfoView.swift */,
 			);
 			path = app;
 			sourceTree = "<group>";
@@ -230,10 +233,10 @@
 			};
 			buildConfigurationList = 6E40ABA52A1C60F1009AD3E8 /* Build configuration list for PBXProject "app" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
+				ko,
 				Base,
 			);
 			mainGroup = 6E40ABA12A1C60F1009AD3E8;
@@ -253,8 +256,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E8778B22A40F9500011DF22 /* Assets.xcassets in Resources */,
 				6E40ABB52A1C60F3009AD3E8 /* Preview Assets.xcassets in Resources */,
-				6E40ABB22A1C60F3009AD3E8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +289,7 @@
 				6ED57FEB2A2705FA004091EF /* BusstopInfo.swift in Sources */,
 				6E40ABBA2A1C60F3009AD3E8 /* app.xcdatamodeld in Sources */,
 				6E40ABB02A1C60F1009AD3E8 /* Main View.swift in Sources */,
+				6E2CCE0F2A67F1FF00BB996B /* LineinfoView.swift in Sources */,
 				6E40ABDD2A1C6211009AD3E8 /* DB.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,6 +335,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -377,6 +382,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "나주 버스";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -391,6 +397,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -431,6 +438,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "나주 버스";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -449,6 +457,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"app/Preview Content\"";
+				DEVELOPMENT_TEAM = 25CB28NX5R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -477,6 +486,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"app/Preview Content\"";
+				DEVELOPMENT_TEAM = 25CB28NX5R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
