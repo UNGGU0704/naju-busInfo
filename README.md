@@ -37,9 +37,9 @@ https://apps.apple.com/kr/app/나주시-버스/id6459411077
 
 | 메인화면 | 정류장 검색 표시 |
 | :---: | :---: |
-| <img src="img/IMG_5918.PNG" width="200" align="center"> | <img src="img/IMG_5923.PNG" width="200" align="center"> |
+| <img src="img/readMe/IMG_5918.PNG" width="200" align="center"> | <img src="img/readMe/IMG_5923.PNG" width="200" align="center"> |
 | **도착 정보 표시** | **노선 정보 표시** |
-| <img src="img/busStopInfo.png" width="200" align="center"> | <img src="img/busLineInfo.png" width="200" align="center"> |
+| <img src="img/readMe/busStopInfo.png" width="200" align="center"> | <img src="img/readMe/busLineInfo.png" width="200" align="center"> |
 
 <img width="69" alt="스크린샷 2023-06-20 오후 11 36 52" src="https://github.com/UNGGU0704/Naju_busInfo/assets/130115689/16bc9a8a-7a9a-465f-929f-0b5c934b83f2">
 
