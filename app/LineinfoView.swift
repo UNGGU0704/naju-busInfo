@@ -110,14 +110,12 @@ struct LineinfoView: View {
                                     if(nowbusStopID == selectedLine[index].busStopID){
                                         Text("\(selectedLine[index].busStopName)")
                                             .font(.headline)
-                                            .foregroundStyle(.black)
                                             .id(-1) // 최초 스크롤 위치를 이동시키기 위한 ID
                                             .padding()
                                     }
                                     else{
                                         Text("\(selectedLine[index].busStopName)")
                                             .font(.headline)
-                                            .foregroundColor(.black)
                                             .padding()
                                     }
                                     
