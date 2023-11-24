@@ -16,7 +16,7 @@ struct busInfoResult: View {
     var body: some View {
         VStack(alignment: .leading) {
             if selectedArrival.isEmpty {
-                Text("정보가 없습니다.")
+                Text("현재 정류장 버스 정보가 없습니다.")
             } else {
                 Section(header: HStack {
                     Text(busStopName)
