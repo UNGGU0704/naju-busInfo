@@ -111,14 +111,13 @@ struct LineinfoView: View {
                                         Text("\(selectedLine[index].busStopName)")
                                             .font(.headline)
                                             .foregroundStyle(.black)
-                                            .id(-1) // 스크롤 위치를 이동시키기 위한 ID
+                                            .id(-1) // 최초 스크롤 위치를 이동시키기 위한 ID
                                             .padding()
                                     }
                                     else{
                                         Text("\(selectedLine[index].busStopName)")
                                             .font(.headline)
                                             .foregroundColor(.black)
-                                            .id(index) // 스크롤 위치를 이동시키기 위한 ID
                                             .padding()
                                     }
                                     
@@ -130,7 +129,7 @@ struct LineinfoView: View {
                                     
                                     Spacer() // 버스 정류장 점과 버스 정류장 이름을 수평으로 맞추기 위해 Spacer 추가
                                     if(nowbusStopID == selectedLine[index].busStopID){
-                                        Text("현재 정류장 ")
+                                        Text("내 위치 ")
                                             .font(.subheadline)
                                             .foregroundColor(.gray)
                                     }
@@ -150,7 +149,6 @@ struct LineinfoView: View {
                                 isRotating.toggle()
                                 fetchLineData(for: LineID)
                                 fetchLocationData(for: LineID)
-                                proxy.scrollTo(-1, anchor: .center)
                                 print("버튼 실행 ")
                                 
                             }) {
