@@ -21,14 +21,12 @@ struct busInfoResult: View {
                 Section(header: HStack {
                     Text(busStopName)
                         .font(.custom("NotoSans-Bold", size: 24))
-                        .foregroundColor(.black)
                         .lineLimit(1) // 한 줄로 제한
                         .minimumScaleFactor(0.5) // 최소 축소 비율 설정
                         .padding(.leading, 20) // 왼쪽 여백 추가
                     Spacer()
                     Text(nextBusStop + " 방향")
                         .font(.subheadline)
-                        .foregroundColor(.black)
                         .lineLimit(1) // 한 줄로 제한
                         .minimumScaleFactor(0.5) // 최소 축소 비율 설정
                         .padding(.trailing, 38) // 오른쪽 여백 추가
