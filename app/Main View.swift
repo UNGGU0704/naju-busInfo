@@ -21,8 +21,7 @@ struct ContentView: View {
     @FetchRequest(entity: Item.entity(), sortDescriptors: []) var items: FetchedResults<Item>
     @State var showAlert = false
     @State private var busstopName = "" // 사용자로부터 입력 받을 버스 이름을 저장하는 상태 변수
-    //  @State private var showAlert = false // Alert 표시 여부를 저장하는 상태 변수
-    
+
     var body: some View {
         NavigationView {
             VStack {

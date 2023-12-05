@@ -42,7 +42,7 @@ public struct SearchResultView: View {
         VStack {
             if isDataLoaded {
                 if busStopNames.isEmpty {
-                    Text("No bus stops found")
+                    Text("버스 정보가 없습니다.")
                 } else {
                     List(busStopNames.indices, id: \.self) { index in
                         NavigationLink(destination: busInfoResult(busStopName: busStopNames[index], busStopID: busStopIDs[index], nextBusStop: nextBusStops[index])){
