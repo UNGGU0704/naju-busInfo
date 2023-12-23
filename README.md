@@ -74,25 +74,25 @@ https://apps.apple.com/kr/app/나주시-버스/id6459411077
 
 ## 파일(File)
 
-#### Main View.swift
+#### `Main View.swift`
 - 앱 실행시 보이는 메인 화면입니다. \n
   버스 정류장을 검색하는 기능을 가지고 있습니다.
-#### searchBus.swift
+#### `searchBus.swift`
 - 정류장 정보를 검색하는 기능을 가지고 있습니다.
-#### searchResultView.swift
+#### `searchResultView.swift`
 - 버스 정류장 이름을 기반으로 CoreData에서 정류장 정보를 검색하고 \n
   해당 정류장의 도착 정보를 표시하는 기능을 가지고 있습니다.
-#### LineinfoView.swift
+#### `LineinfoView.swift`
 - 해당 노선이 지나가는 모든 버스 정류장을 보여줍니다. \n
   추가적으로 해당 노선이 현재 어디 있는지 또한 보여줍니다.
-#### DB.swift
+#### `DB.swift`
 - CoreData의 저장, 삭제 기능을 가지고 있습니다.
-#### DB view.swift
+#### `DB view.swift`
 - CoreData에서 가져온 정류소 정보를 표시합니다.
   DB.swift의 생성 삭제 기능을 제어합니다.
-#### PersistenceController.swift
+#### `PersistenceController.swift`
 - CoreData를 설정하고 영구 저장소를 로드합니다.
-#### app.xcdatamodeld
+#### `app.xcdatamodeld`
 - CoreData의 저장소입니다.
 
 ## 기여(Contributing)
