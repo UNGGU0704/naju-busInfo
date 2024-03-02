@@ -64,10 +64,10 @@ struct busInfoResult: View {
                                         .font(.subheadline)
                                     
                                     Text("도착까지 남은 정류장 갯수: \(lineInfo.remainStop)")
-                                        .font(.subheadline)                    
+                                        .font(.subheadline)
                                 }
                             }
-                            
+                        
                             Spacer()
                         }
                         .padding(.vertical, 8)
@@ -79,11 +79,8 @@ struct busInfoResult: View {
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button(action: {
-                                // Perform action
                                 isRotating.toggle()
                                 fetchData(for: busStopID)
-                                print("버튼 실행 ")
-                                
                             }) {
                                 Image(systemName: "arrow.clockwise.circle")
                                     .rotationEffect(.degrees(isRotating ? 360 : 0))
@@ -92,15 +89,13 @@ struct busInfoResult: View {
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button(action: {
-                                // Perform action
                                 saveToWishList()
                             }) {
-                                Label("즐겨찾기 추가", systemImage: "heart.fill")
-                            }.disabled(selectedArrival.isEmpty)
-                                .contentShape(Rectangle())
-                                .alert(isPresented: $showAlert) {
+                                Image(systemName: "heart.fill")
+                            }.alert(isPresented: $showAlert) {
                                     Alert(title: Text("알림"), message: Text(alertMessage), dismissButton: .default(Text("확인")))
                                 }
+                            
                         }
                     }
                 }
