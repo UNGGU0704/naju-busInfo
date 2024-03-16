@@ -183,7 +183,8 @@ struct LineinfoView: View {
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Spacer()
-                    
+                    //다른 웹 페이지로 리다이렉트
+                    WebRedirectHelper.redirectWeb(to: "url")
                     Menu {
                         Button(action: {
                         }) {
