@@ -180,10 +180,26 @@ struct LineinfoView: View {
                 fetchLineData(for: LineID)
                 fetchLocationData(for: LineID)
             }
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Spacer()
+                    
+                    Menu {
+                        Button(action: {
+                        }) {
+                            Label("즐겨찾기 전체 삭제", systemImage: "function1")
+                        }
+                        
+                    } label: {
+                        Image(systemName: "ellipsis.circle")
+                    }
+                }
+            }
             
         }
         .navigationBarTitleDisplayMode(.inline)
         .padding(.bottom, -30)
+        
         
     } // 바디
     
