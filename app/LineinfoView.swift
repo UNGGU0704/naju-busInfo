@@ -198,10 +198,7 @@ struct LineinfoView: View {
             .sheet(isPresented: $showPDFViewer) {
                 // 모달로 표시될 PDFViewer
                 // PDFViewer를 전달하여 모달로 표시
-               
-                if let selectedPDFNumber = Int(Linename) {
-                    PDFViewer(selectedPDFNumber: selectedPDFNumber)
-                } else {}
+                PDFViewer(selectedPDFNumber: Linename)
             }
 
             
