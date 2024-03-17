@@ -25,7 +25,7 @@ struct busInfoResult: View {
                         .minimumScaleFactor(0.5) // 최소 축소 비율 설정
                         .padding(.leading, 20) // 왼쪽 여백 추가
                     Spacer()
-                    Text(nextBusStop + " 방향")
+                    Text(nextBusStop)
                         .font(.subheadline)
                         .lineLimit(1) // 한 줄로 제한
                         .minimumScaleFactor(0.5) // 최소 축소 비율 설정
@@ -64,7 +64,7 @@ struct busInfoResult: View {
                                         .font(.subheadline)
                                     
                                     Text("도착까지 남은 정류장 갯수: \(lineInfo.remainStop)")
-                                        .font(.subheadline)
+                                        .font(.subheadline)                    
                                 }
                             }
                         
