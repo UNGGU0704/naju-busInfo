@@ -15,9 +15,6 @@ struct busInfoResult: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            if selectedArrival.isEmpty {
-                Text("현재 정류장 버스 정보가 없습니다.")
-            } else {
                 Section(header: HStack {
                     Text(busStopName)
                         .font(.custom("NotoSans-Bold", size: 24))
@@ -34,6 +31,20 @@ struct busInfoResult: View {
                 }.padding(.bottom, -5)
                     .padding(.top, -25)
                 ) {
+                
+                    //정류장 정보가 아무것도 없을때 표시
+                    if selectedArrival.isEmpty {
+                        ZStack {
+                            VStack {
+                                Spacer()
+                                Text("현재 정류장 버스 정보가 없습니다.")
+                                    .multilineTextAlignment(.center)
+                                    .padding() // 원하는 여백을 추가합니다.
+                                Spacer()
+                            }
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    }
                     List(selectedArrival.indices, id: \.self) { index in
                         let lineInfo = selectedArrival[index]
                 
@@ -99,7 +110,7 @@ struct busInfoResult: View {
                         }
                     }
                 }
-            }
+            
             
         }
         .onAppear(){
