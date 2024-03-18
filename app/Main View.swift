@@ -82,7 +82,7 @@ struct ContentView: View {
                                 if let name = wishItem.busStopName {
                                     if let nextName = wishItem.nextBusStop {
                                         NavigationLink(destination: busInfoResult(busStopName: name, busStopID: Int(wishItem.busStopID), nextBusStop: nextName)) {
-                                            Text(name + " (" + nextName + " 방향)")
+                                            Text(name + " (" + nextName + ")")
                                         }
                                     } else {
                                         Text("Unknown")
@@ -129,4 +129,3 @@ struct ContentView: View {
 
     
 }
-

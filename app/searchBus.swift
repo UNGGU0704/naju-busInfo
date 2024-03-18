@@ -41,26 +41,35 @@ public struct SearchResultView: View {
     public var body: some View {
         VStack {
             if isDataLoaded {
-                if busStopNames.isEmpty {
-                    Text("버스 정보가 없습니다.")
-                } else {
+
+                    
                     List(busStopNames.indices, id: \.self) { index in
-                        NavigationLink(destination: busInfoResult(busStopName: busStopNames[index], busStopID: busStopIDs[index], nextBusStop: nextBusStops[index])){
+                        
+                        //다음 정류장 방향 같은 경우 미리 " 방향"을 붙여서 전달한다! 240318 수정
+                        NavigationLink(destination: busInfoResult(busStopName: busStopNames[index], busStopID: busStopIDs[index], nextBusStop: nextBusStops[index].isEmpty ? "다음 정류장 없음" : nextBusStops[index] + " 방향")){
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("정류장 이름: \(busStopNames[index])")
                                     .font(.headline)
                                     .foregroundColor(.blue)
                                 
-                                Text("\(nextBusStops[index]) 방향")
-                                    .font(.subheadline)
-                                    .foregroundColor(.gray)
+                                
+                                if nextBusStops[index].isEmpty {
+                                    Text("다음 정류장 없음")
+                                        .font(.subheadline)
+                                        .foregroundColor(.gray)
+                                } else {
+                                    Text("\(nextBusStops[index]) 방향")
+                                        .font(.subheadline)
+                                        .foregroundColor(.gray)
+                                }
+                                
                                 
                                 Divider()
                             }
                         }
                     }.navigationTitle("검색결과")
                     
-                }
+                
             } else {
                 Text("Loading...")
             }
