@@ -61,6 +61,8 @@ struct LineinfoView: View {
     @State private var selectedLine: [Line] = []
     @State private var selectedLocation: [Location] = []
     @State private var isRotating = false
+    @State private var showPDFViewer = false
+    
     @State private var scrollToIndex: Int = 0
     var body: some View {
         ScrollViewReader { proxy in
@@ -140,15 +142,27 @@ struct LineinfoView: View {
                             .onAppear {
                                 proxy.scrollTo(-1, anchor: .center)
                             }
-                    } .toolbar {
-                        ToolbarItem(placement: .navigationBarTrailing) {
+                    }.toolbar {
+                        ToolbarItemGroup(placement: .navigationBarTrailing) {
+                            Spacer()
+                            Menu {
+                                Button(action: {
+                                    showPDFViewer = true
+                                    // Linename 문자열을 정수로 변환하여 선택된 PDF 번호를 가져옴
+                                }) {
+                                    Text("시간표 보기")
+                                }
+                            } 
+                            label: {
+                                Image(systemName: "ellipsis.circle")
+                            }
+                            
                             Button(action: {
                                 // Perform action
                                 isRotating.toggle()
                                 fetchLineData(for: LineID)
                                 fetchLocationData(for: LineID)
                                 print("버튼 실행 ")
-                                
                             }) {
                                 Image(systemName: "arrow.clockwise.circle")
                                     .rotationEffect(.degrees(isRotating ? 360 : 0))
@@ -156,6 +170,7 @@ struct LineinfoView: View {
                             }
                         }
                     }
+
                     .padding(.horizontal, 16)
                     .listStyle(PlainListStyle())
                     .overlay(
@@ -180,10 +195,17 @@ struct LineinfoView: View {
                 fetchLineData(for: LineID)
                 fetchLocationData(for: LineID)
             }
+            .sheet(isPresented: $showPDFViewer) {
+                // 모달로 표시될 PDFViewer
+                // PDFViewer를 전달하여 모달로 표시
+                PDFViewer(selectedPDFNumber: Linename)
+            }
+
             
         }
         .navigationBarTitleDisplayMode(.inline)
         .padding(.bottom, -30)
+        
         
     } // 바디
     
