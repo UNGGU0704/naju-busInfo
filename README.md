@@ -33,14 +33,12 @@ https://apps.apple.com/kr/app/나주시-버스/id6459411077
 - [x] ℹ️ 노선별 버스 시간표 제공
 - [ ] ℹ️ 노선 검색 제공
 
-
 ## 사용(Usage)
-
-| 메인화면 | 정류장 검색 표시 |
+| 정류장 검색 | 도착 정보 표시 |
 | :---: | :---: |
-| <img src="img/readMe/IMG_5918.PNG" width="200" align="center"> | <img src="img/readMe/IMG_5923.PNG" width="200" align="center"> |
-| **도착 정보 표시** | **노선 정보 표시** |
-| <img src="img/readMe/busStopInfo.png" width="200" align="center"> | <img src="img/readMe/busLineInfo.png" width="200" align="center"> |
+| <img src = "https://github.com/unggu0704/naju-busInfo/assets/130115689/e10a534a-be2a-426f-b29c-1cfd3e270c4a" width="200" align="center"> | <img src="https://github.com/unggu0704/naju-busInfo/assets/130115689/572b68cc-d38b-4c8b-b377-9bede7218ede" width="200" align="center"> |
+| **즐겨찾기 관리** | **노선 정보, 시간표 표시** |
+| <img src="https://github.com/unggu0704/naju-busInfo/assets/130115689/714fcf1e-faab-4046-bceb-f3baca8752c4" width="200" align="center"> | <img src="https://github.com/unggu0704/naju-busInfo/assets/130115689/4dd74a65-5607-4634-9aaf-1db58f5a5ad8" width="200" align="center"> |
 
 <img width="69" alt="스크린샷 2023-06-20 오후 11 36 52" src="https://github.com/UNGGU0704/Naju_busInfo/assets/130115689/16bc9a8a-7a9a-465f-929f-0b5c934b83f2">
 
@@ -56,10 +54,11 @@ https://apps.apple.com/kr/app/나주시-버스/id6459411077
 
 ## 업데이트 기록
 
-### 1,3
+### 1.3
 - 즐겨찾기 Button 클릭시 alert창이 안보이는 버그를 해결 #issue #23
-- 노선 정보 제공에서 버스 시간표 보기 기능 추가 #issue #25
-- 종점 같은 다음 정류장이 없을때 표시 형식 변경
+- 노선 정보 제공에서 버스 시간표 보기 기능 추가 #issue #22
+  - _제공되는 노선 (99x, 16x, 1xx, 2xx, 4xx, 5xx, 70xx)_
+- 종점 같은 다음 정류장이 없을때 표시 형식 변경 #issue #25
 - API 정보가 없을 경우의 UI 변경
   
 ### 1.2
