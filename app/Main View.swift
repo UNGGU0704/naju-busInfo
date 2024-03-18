@@ -67,7 +67,7 @@ struct ContentView: View {
                     }
                 }
                 )
-                .navigationTitle("버스 정보입력")
+                .navigationTitle("정류장 이름입력")
                 .padding()
                 
                 List {
