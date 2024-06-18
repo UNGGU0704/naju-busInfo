@@ -13,51 +13,77 @@ struct appApp: App {
     }
 }
 
-
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: WishList.entity(), sortDescriptors: []) var wishList: FetchedResults<WishList>
     @FetchRequest(entity: Item.entity(), sortDescriptors: []) var items: FetchedResults<Item>
     @State var showAlert = false
-    @State private var busstopName = "" // 사용자로부터 입력 받을 버스 이름을 저장하는 상태 변수
+    @State private var busstopName = "" // 사용자로부터 입력 받을 버스 정류장 이름을 저장하는 상태 변수
+    @State private var routeNumber = "" // 사용자로부터 입력 받을 노선 번호를 저장하는 상태 변수
+    @State private var searchType = 0 // 0: Bus Stop Name, 1: Route Number
 
     var body: some View {
         NavigationView {
             VStack {
-                TextField("버스 정류장을 입력하세요", text: $busstopName)
-                    .padding(.horizontal, 20)
-                    .padding(.vertical, 10)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(Color(.systemGray6))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.black, lineWidth: 2)
-                            )
-                    )
-                    .accentColor(.black)
-                    .padding(.horizontal, 10)
-                
-                NavigationLink(destination: SearchResultView(busstopName: $busstopName)) {
+                Picker("검색 방식", selection: $searchType) {
+                    Text("정류장 이름").tag(0)
+                    Text("노선 번호").tag(1)
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding()
+
+                if searchType == 0 {
+                    TextField("버스 정류장을 입력하세요", text: $busstopName)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 10)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .foregroundColor(Color(.systemGray6))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color.black, lineWidth: 2)
+                                )
+                        )
+                        .accentColor(.black)
+                        .padding(.horizontal, 10)
+                } else {
+                    TextField("노선 번호를 입력하세요", text: $routeNumber)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 10)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .foregroundColor(Color(.systemGray6))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color.black, lineWidth: 2)
+                                )
+                        )
+                        .accentColor(.black)
+                        .padding(.horizontal, 10)
+                }
+
+                NavigationLink(destination: searchType == 0 ?
+                               AnyView(SearchResultView(busstopName: $busstopName)) :
+                               AnyView(SearchLineResultView(busstopName: $busstopName))) {
                     Text("검색")
                 }
                 .toolbar {
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
                         Spacer()
-                        
+
                         Menu {
                             Button(action: {
                                 deleteAllWishListItems()
                             }) {
                                 Label("즐겨찾기 전체 삭제", systemImage: "function1")
                             }
-                            
+
                         } label: {
                             Image(systemName: "ellipsis.circle")
                         }
                     }
                 }
-                
+
                 .navigationBarItems(trailing:
                                         HStack {
                     Spacer()
@@ -66,9 +92,9 @@ struct ContentView: View {
                     }
                 }
                 )
-                .navigationTitle("정류장 이름입력")
+                .navigationTitle("검색")
                 .padding()
-                
+
                 List {
                     Section(header: Text("즐겨찾기")) {
                         if wishList.isEmpty {
@@ -94,7 +120,7 @@ struct ContentView: View {
                     }
                 }
             }
-            
+
         }.onAppear {
             checkForEmptyItems()
         }
@@ -107,11 +133,12 @@ struct ContentView: View {
                   secondaryButton: .cancel())
         }
     }
+
     func deleteAllWishListItems() {
         for item in wishList {
             viewContext.delete(item)
         }
-        
+
         do {
             try viewContext.save()
         } catch {
@@ -119,12 +146,10 @@ struct ContentView: View {
             print("Failed to delete WishList items: \(error)")
         }
     }
-    
+
     func checkForEmptyItems() {
         if items.isEmpty {
             showAlert = true
         }
     }
-
-    
 }
