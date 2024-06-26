@@ -41,6 +41,7 @@ struct DBView: View {
                     // Button 1의 동작
                     print("Button 1 tapped")
                     fetchBusStopData()
+                    fetchBusRouteData()
                 }
                 .padding()
                 
