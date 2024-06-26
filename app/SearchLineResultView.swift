@@ -23,7 +23,47 @@ struct SearchLineResultView: View {
                     let lineID = Int(item.lineID) //Int32 -> Int로 unwrapping
                     if let lineName = item.lineName{
                         NavigationLink(destination: LineinfoView(LineID: lineID, Linename: lineName, nowbusStopID: 99999)) {
-                            Text("번호 : " + lineName)
+                            HStack {
+                                if lineName.contains("99") || lineName.contains("좌석") || lineName.contains("160") || lineName.contains("161") {
+                                    VStack(alignment: .center, spacing: 5) {
+                                        Image(systemName: "bus")
+                                            .font(.title)
+                                            .foregroundColor(.purple)
+                                        Text(" \(lineName)")
+                                            .font(.headline)
+                                    }
+                                } else if lineName.contains("99") {
+                                    VStack(alignment: .leading, spacing: 5) {
+                                        Image(systemName: "bus")
+                                            .font(.title)
+                                            .foregroundColor(.green)
+                                        Text(" \(lineName)")
+                                            .font(.headline)
+                                    }
+                                } else {
+                                    VStack(alignment: .leading, spacing: 5) {
+                                        Image(systemName: "bus")
+                                            .font(.title)
+                                            .foregroundColor(.blue)
+                                        Text(" \(lineName)")
+                                            .font(.headline)
+                                    }
+                                }
+                                // 상세 정보 표기
+                                VStack(alignment: .leading, spacing: 5) {
+                                    Text("\(item.dirUpName ?? "정보 없음") ~ \(item.dirDownName ?? "정보 없음")")
+                                        .font(.subheadline)
+                                    Text("첫차 시간: \(item.firstTime ?? "정보 없음")")
+                                        .font(.subheadline)
+                                    Text("막차 시간: \(item.lastTime ?? "정보 없음")")
+                                        .font(.subheadline)
+                                    Text("경유지: \(item.dirPass ?? "정보 없음")")
+                                        .font(.subheadline)
+                                        .lineLimit(2) // 경유지 텍스트의 줄 수 제한
+                                }
+               
+                            }
+                            .padding(.vertical, 5)
                         }
                     } else {
                         Text("Unknown")
@@ -32,7 +72,6 @@ struct SearchLineResultView: View {
             }
         }
         .onAppear {
-            print("searchLine에 돌입!")
             fetchMatchingItems()
         }
         .navigationTitle("노선 검색 결과")
