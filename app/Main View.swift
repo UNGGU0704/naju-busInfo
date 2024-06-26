@@ -64,7 +64,7 @@ struct ContentView: View {
 
                 NavigationLink(destination: searchType == 0 ?
                                AnyView(SearchResultView(busstopName: $busstopName)) :
-                               AnyView(SearchLineResultView(busstopName: $busstopName))) {
+                               AnyView(SearchLineResultView(busRouteNumber: $routeNumber))) {
                     Text("검색")
                 }
                 .toolbar {

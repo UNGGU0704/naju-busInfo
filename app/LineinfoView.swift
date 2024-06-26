@@ -55,7 +55,7 @@ struct Location: Codable {
 struct LineinfoView: View {
     public var LineID: Int // 버스 ID 받아옴
     public var Linename: String
-    public var nowbusStopID: Int
+    public var nowbusStopID: Int?
     @State private var selectedLine: [Line] = []
     @State private var selectedLocation: [Location] = []
     @State private var isRotating = false
