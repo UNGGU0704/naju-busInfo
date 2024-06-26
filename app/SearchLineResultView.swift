@@ -40,7 +40,7 @@ struct SearchLineResultView: View {
 
     private func fetchMatchingItems() {
         let fetchRequest: NSFetchRequest<LineInfo> = LineInfo.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "lineName == %@", busRouteNumber)
+        fetchRequest.predicate = NSPredicate(format: "lineName CONTAINS[c] %@", busRouteNumber)
 
         do {
             matchedItems = try viewContext.fetch(fetchRequest)
