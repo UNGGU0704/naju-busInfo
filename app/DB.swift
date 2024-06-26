@@ -80,17 +80,29 @@ struct BusRoute: Codable {
 
 
 
-public func deleteExistingData() {
+public func deleteExistingBusStops() {
     let context = PersistenceController.shared.container.viewContext
     let busStopRequest: NSFetchRequest<Item> = Item.fetchRequest()
-    let busRouteRequest: NSFetchRequest<LineInfo> = LineInfo.fetchRequest()
 
     do {
         let busStops = try context.fetch(busStopRequest)
         for busStop in busStops {
             context.delete(busStop)
         }
-        
+
+        try context.save()
+        context.processPendingChanges()
+    } catch {
+        print("Error deleting existing bus stops: \(error)")
+    }
+}
+
+
+public func deleteExistingBusRoutes() {
+    let context = PersistenceController.shared.container.viewContext
+    let busRouteRequest: NSFetchRequest<LineInfo> = LineInfo.fetchRequest()
+
+    do {
         let busRoutes = try context.fetch(busRouteRequest)
         for busRoute in busRoutes {
             context.delete(busRoute)
@@ -99,14 +111,13 @@ public func deleteExistingData() {
         try context.save()
         context.processPendingChanges()
     } catch {
-        print("Error deleting existing data: \(error)")
+        print("Error deleting existing bus routes: \(error)")
     }
 }
 
 
 public func fetchBusStopData() {
-    print("fetch 함수 작동!")
-    deleteExistingData()
+    deleteExistingBusStops()
     let persistenceController = PersistenceController.shared
     let context = persistenceController.container.viewContext
     
@@ -162,7 +173,7 @@ public func fetchBusStopData() {
 
 public func fetchBusRouteData() {
     print("Fetching bus route data...")
-    deleteExistingData()
+    deleteExistingBusRoutes()
     
     let context = PersistenceController.shared.container.viewContext
     guard let url = URL(string: "http://121.147.206.212/json/lineInfo") else {
