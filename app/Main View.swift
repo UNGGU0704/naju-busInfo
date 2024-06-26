@@ -93,7 +93,7 @@ struct ContentView: View {
                             Button(action: {
                                 deleteAllWishListItems()
                             }) {
-                                Label("즐겨찾기 전체 삭제", systemImage: "function1")
+                                Label("즐겨찾기 전체 삭제", systemImage: "trash.circle")
                             }
 
                         } label: {
