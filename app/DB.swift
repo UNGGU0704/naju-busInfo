@@ -11,6 +11,17 @@ struct DBApiResponse<T: Codable>: Codable {
         case row_count = "ROW_COUNT"
     }
 }
+
+struct RouteApiResponse<T: Codable>: Codable {
+    let routes: [T]
+    let row_count: Int
+    let admin: Int = 5
+
+    private enum CodingKeys: String, CodingKey {
+        case routes = "LINE_LIST"
+        case row_count = "ROW_COUNT"
+    }
+}
     
 struct BusStop: Codable {
     let busStopName: String
@@ -151,8 +162,9 @@ public func fetchBusStopData() {
 
 public func fetchBusRouteData() {
     print("Fetching bus route data...")
-    let context = PersistenceController.shared.container.viewContext
+    deleteExistingData()
     
+    let context = PersistenceController.shared.container.viewContext
     guard let url = URL(string: "http://121.147.206.212/json/lineInfo") else {
         print("Invalid URL")
         return
@@ -171,8 +183,8 @@ public func fetchBusRouteData() {
         
         context.performAndWait {
             do {
-                let apiResponse = try JSONDecoder().decode(DBApiResponse<BusRoute>.self, from: data)
-                let busRouteData = apiResponse.bus_stops
+                let apiResponse = try JSONDecoder().decode(RouteApiResponse<BusRoute>.self, from: data)
+                let busRouteData = apiResponse.routes
                 
                 for route in busRouteData {
                     let newRoute = LineInfo(context: context)
