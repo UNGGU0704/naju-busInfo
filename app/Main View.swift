@@ -17,6 +17,7 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: WishList.entity(), sortDescriptors: []) var wishList: FetchedResults<WishList>
     @FetchRequest(entity: Item.entity(), sortDescriptors: []) var items: FetchedResults<Item>
+    @FetchRequest(entity: LineInfo.entity(), sortDescriptors: []) var lines: FetchedResults<LineInfo>
     @State var showAlert = false
     @State private var busstopName = "" // 사용자로부터 입력 받을 버스 정류장 이름을 저장하는 상태 변수
     @State private var routeNumber = "" // 사용자로부터 입력 받을 노선 번호를 저장하는 상태 변수
@@ -26,8 +27,8 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 Picker("검색 방식", selection: $searchType) {
-                    Text("정류장 이름").tag(0)
-                    Text("노선 번호").tag(1)
+                    Text("정류장 이름").tag(0).font(.headline)
+                    Text("노선 번호").tag(1).font(.headline)
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding()
@@ -92,7 +93,7 @@ struct ContentView: View {
                     }
                 }
                 )
-                .navigationTitle("검색")
+                .navigationTitle(getNavigationTitle())
                 .padding()
 
                 List {
@@ -125,10 +126,11 @@ struct ContentView: View {
             checkForEmptyItems()
         }
         .alert(isPresented: $showAlert) {
-            Alert(title: Text("데이터 없음"),
-                  message: Text("정류장 데이터가 없습니다. 정보를 받아오겠습니까?"),
+            Alert(title: Text("데이터 변경사항 있음"),
+                  message: Text("데이터 정보가 변경되었습니다. 정보를 받아오겠습니까?"),
                   primaryButton: .default(Text("네"), action: {
-                      fetchBusStopData()
+                        fetchBusStopData()
+                        fetchBusRouteData()
                   }),
                   secondaryButton: .cancel())
         }
@@ -148,8 +150,12 @@ struct ContentView: View {
     }
 
     func checkForEmptyItems() {
-        if items.isEmpty {
+        if items.isEmpty || lines.isEmpty {
             showAlert = true
         }
+    }
+    
+    private func getNavigationTitle() -> String {
+        return searchType == 0 ? "정류장으로 검색" : "버스번호로 검색"
     }
 }
