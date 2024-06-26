@@ -62,6 +62,23 @@ struct ContentView: View {
                         .accentColor(.black)
                         .padding(.horizontal, 10)
                 }
+                NavigationLink(
+                    destination: searchDestination(),
+                    isActive: $navigate,
+                    label: {
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.white) // Adjust image color if needed
+                            Text("검색")
+                                .foregroundColor(.white)
+                                .padding(.horizontal)
+                        }
+                        .padding()
+                        .background(Color.blue)
+                        .cornerRadius(15)
+                        .padding(.horizontal)
+                    }
+                )
 
                 NavigationLink(destination: searchType == 0 ?
                                AnyView(SearchResultView(busstopName: $busstopName)) :
