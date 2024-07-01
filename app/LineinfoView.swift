@@ -38,11 +38,10 @@ struct Line: Codable, Identifiable, Equatable, Hashable {
     private enum CodingKeys: String, CodingKey {
         case busStopName = "BUSSTOP_NAME"
         case busStopID = "BUSSTOP_ID"
-        
     }
 }
 
-struct Location: Codable{
+struct Location: Codable {
     let id = UUID()
     let busStopID: Int
     let busNo: String
@@ -50,18 +49,21 @@ struct Location: Codable{
     private enum CodingKeys: String, CodingKey {
         case busNo = "BUS_NO"
         case busStopID = "BUSSTOP_ID"
-        
     }
 }
 
 struct LineinfoView: View {
-    public var LineID : Int //버스 ID 받아옴
+    public var LineID: Int // 버스 ID 받아옴
     public var Linename: String
-    public var nowbusStopID: Int
+    public var nowbusStopID: Int?
     @State private var selectedLine: [Line] = []
     @State private var selectedLocation: [Location] = []
     @State private var isRotating = false
     @State private var showPDFViewer = false
+    
+    @StateObject private var networkMonitor = NetworkMonitor()
+    @State private var showAlert = false
+    @State private var alertMessage = "" // 에러 메시지를 저장할 변수
     
     @State private var scrollToIndex: Int = 0
     var body: some View {
@@ -72,18 +74,18 @@ struct LineinfoView: View {
                     Text("노선 정보가 없습니다. (나주버스만 제공됩니다.)")
                 } else {
                     ScrollView {
-                        VStack{
+                        VStack {
                             ForEach(selectedLine.indices, id: \.self) { index in
                                 
                                 HStack(alignment: .center, spacing: 8) {
                                     if let location = findBusLocation(for: selectedLine[index].busStopID) {
-                                        if Linename.contains("셔틀")||Linename.contains("우정") || Linename.contains("그린") {
+                                        if Linename.contains("셔틀") || Linename.contains("우정") || Linename.contains("그린") {
                                             Image(systemName: "bus")
                                                 .font(.title)
                                                 .foregroundColor(.green)
                                                 .frame(width: 30) // 버스 그림의 너비를 지정해줍니다.
                                         } else if Linename.contains("99") || Linename.contains("좌석") ||
-                                                    Linename.contains("161") || Linename.contains("160"){
+                                                    Linename.contains("161") || Linename.contains("160") {
                                             Image(systemName: "bus")
                                                 .font(.title)
                                                 .foregroundColor(.purple)
@@ -95,40 +97,36 @@ struct LineinfoView: View {
                                                 .frame(width: 30) // 버스 그림의 너비를 지정해줍니다.
                                         }
                                         
-                                    }
-                                    else if(nowbusStopID == selectedLine[index].busStopID){
+                                    } else if (nowbusStopID == selectedLine[index].busStopID) {
                                         Circle()
                                             .offset(x: -2)
                                             .frame(width: 30, height: 15)
                                             .foregroundColor(.red)
-                                    }
-                                    else{
+                                    } else {
                                         Circle()
                                             .frame(width: 25, height: 10)
                                             .foregroundColor(.blue)
                                     }
                                     
-                                    
-                                    if(nowbusStopID == selectedLine[index].busStopID){
+                                    if (nowbusStopID == selectedLine[index].busStopID) {
                                         Text("\(selectedLine[index].busStopName)")
                                             .font(.headline)
                                             .id(-1) // 최초 스크롤 위치를 이동시키기 위한 ID
                                             .padding()
-                                    }
-                                    else{
+                                    } else {
                                         Text("\(selectedLine[index].busStopName)")
                                             .font(.headline)
                                             .padding()
                                     }
                                     
-                                    if let location = findBusLocation(for: selectedLine[index].busStopID){
+                                    if let location = findBusLocation(for: selectedLine[index].busStopID) {
                                         Text("\(location.busNo)")
                                             .font(.subheadline)
                                             .foregroundColor(.gray)
                                     }
                                     
                                     Spacer() // 버스 정류장 점과 버스 정류장 이름을 수평으로 맞추기 위해 Spacer 추가
-                                    if(nowbusStopID == selectedLine[index].busStopID){
+                                    if (nowbusStopID == selectedLine[index].busStopID) {
                                         Text("내 위치 ")
                                             .font(.subheadline)
                                             .foregroundColor(.gray)
@@ -136,7 +134,7 @@ struct LineinfoView: View {
                                 }.padding(.vertical, -10)
                                 Divider()
                                 
-                            }// foreeach 대괄호
+                            } // foreach 대괄호
                             .foregroundColor(.gray)
                         }.navigationBarTitle("\(Linename) 번 버스 전체 정보 ")
                             .onAppear {
@@ -152,17 +150,21 @@ struct LineinfoView: View {
                                 }) {
                                     Text("시간표 보기")
                                 }
-                            } 
+                            }
                             label: {
                                 Image(systemName: "ellipsis.circle")
                             }
                             
                             Button(action: {
-                                // Perform action
-                                isRotating.toggle()
-                                fetchLineData(for: LineID)
-                                fetchLocationData(for: LineID)
-                                print("버튼 실행 ")
+                                if networkMonitor.isConnected {
+                                    isRotating.toggle()
+                                    fetchLineData(for: LineID)
+                                    fetchLocationData(for: LineID)
+                                    print("버튼 실행")
+                                } else {
+                                    alertMessage = "네트워크 연결이 필요합니다. 연결을 확인해주세요."
+                                    showAlert = true
+                                }
                             }) {
                                 Image(systemName: "arrow.clockwise.circle")
                                     .rotationEffect(.degrees(isRotating ? 360 : 0))
@@ -170,7 +172,9 @@ struct LineinfoView: View {
                             }
                         }
                     }
-
+                    .alert(isPresented: $showAlert) {
+                        Alert(title: Text("오류"), message: Text(alertMessage), dismissButton: .default(Text("확인")))
+                    }
                     .padding(.horizontal, 16)
                     .listStyle(PlainListStyle())
                     .overlay(
@@ -183,35 +187,39 @@ struct LineinfoView: View {
                                 path.addLine(to: lastPoint)
                             }
                         }
-                            .stroke(Color.gray, lineWidth: 2)
+                        .stroke(Color.gray, lineWidth: 2)
                     )
-                    
                     .cornerRadius(10) // 모서리를 둥글게 만듭니다.
                 } // else 종료
                 
             } // VStack 대괄호
             .navigationBarTitle("\(Linename) 번 버스 위치 정보 ")
             .onAppear {
-                fetchLineData(for: LineID)
-                fetchLocationData(for: LineID)
+                if networkMonitor.isConnected {
+                    fetchLineData(for: LineID)
+                    fetchLocationData(for: LineID)
+                } else {
+                    alertMessage = "네트워크 연결이 필요합니다. 연결을 확인해주세요."
+                    showAlert = true
+                }
             }
             .sheet(isPresented: $showPDFViewer) {
                 // 모달로 표시될 PDFViewer
                 // PDFViewer를 전달하여 모달로 표시
                 PDFViewer(selectedPDFNumber: Linename)
             }
-
             
         }
         .navigationBarTitleDisplayMode(.inline)
         .padding(.bottom, -30)
-        
-        
     } // 바디
     
-    
     public func fetchLineData(for LineID: Int) { // 전체 노선 정보를 불러오는 데이터
-        
+        guard networkMonitor.isConnected else {
+            alertMessage = "네트워크 연결이 필요합니다. 연결을 확인해주세요."
+            showAlert = true
+            return
+        }
         
         // Construct the URL for the API request
         guard var urlComponents = URLComponents(string: "http://121.147.206.212/json/lineStationInfo") else {
@@ -231,11 +239,16 @@ struct LineinfoView: View {
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 print("Error fetching data: \(error.localizedDescription)")
+                alertMessage = "\(error.localizedDescription)"
+                showAlert = true
                 return
             }
             
             guard let data = data else {
-                print("No data received")
+                DispatchQueue.main.async {
+                    alertMessage = "데이터를 받을 수 없습니다."
+                    showAlert = true
+                }
                 return
             }
             
@@ -251,15 +264,15 @@ struct LineinfoView: View {
                     }
                 }
             } catch {
-                print("Error decoding JSON data: \(error)")
+                DispatchQueue.main.async {
+                    alertMessage = "JSON 데이터를 디코딩하는 중 오류 발생: \(error)"
+                    showAlert = true
+                }
             }
         }.resume()
-        
     }
     
-    
     public func fetchLocationData(for LineID: Int) { // 노선의 현재 있는 위치만 불러오는 데이터
-        
         
         // Construct the URL for the API request
         guard var urlComponents = URLComponents(string: "http://121.147.206.212/json/busLocationInfo") else {
@@ -279,11 +292,16 @@ struct LineinfoView: View {
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 print("Error fetching data: \(error.localizedDescription)")
+                alertMessage = "\(error.localizedDescription)"
+                showAlert = true
                 return
             }
             
             guard let data = data else {
-                print("No data received")
+                DispatchQueue.main.async {
+                    alertMessage = "데이터를 받을 수 없습니다."
+                    showAlert = true
+                }
                 return
             }
             
@@ -299,10 +317,12 @@ struct LineinfoView: View {
                     }
                 }
             } catch {
-                print("Error decoding JSON data: \(error)")
+                DispatchQueue.main.async {
+                    alertMessage = "JSON 데이터를 디코딩하는 중 오류 발생: \(error)"
+                    showAlert = true
+                }
             }
         }.resume()
-        
     }
     
     private func findBusLocation(for busStopID: Int) -> Location? {
