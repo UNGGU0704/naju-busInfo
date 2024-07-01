@@ -10,10 +10,15 @@
         <attribute name="nextBusStop" optional="YES" attributeType="String"/>
     </entity>
     <entity name="LineInfo" representedClassName="LineInfo" syncable="YES" codeGenerationType="class">
-        <attribute name="dir_Down" optional="YES" attributeType="String"/>
-        <attribute name="dir_Up" optional="YES" attributeType="String"/>
-        <attribute name="lineID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="dirDownName" optional="YES" attributeType="String"/>
+        <attribute name="dirPass" optional="YES" attributeType="String"/>
+        <attribute name="dirUpName" optional="YES" attributeType="String"/>
+        <attribute name="firstTime" optional="YES" attributeType="String"/>
+        <attribute name="lastTime" optional="YES" attributeType="String"/>
+        <attribute name="lineID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="lineKind" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="lineName" optional="YES" attributeType="String"/>
+        <attribute name="runInterval" optional="YES" attributeType="String"/>
     </entity>
     <entity name="WishList" representedClassName="WishList" syncable="YES" codeGenerationType="class">
         <attribute name="busStopID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
