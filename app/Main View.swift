@@ -15,10 +15,15 @@ struct appApp: App {
 }
 
 struct ContentView: View {
+    
+    // coredata 연동 부분
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: WishList.entity(), sortDescriptors: []) var wishList: FetchedResults<WishList>
+    @FetchRequest(entity: WishListOfLine.entity(), sortDescriptors: []) var wishListOfLine: FetchedResults<WishListOfLine>
     @FetchRequest(entity: Item.entity(), sortDescriptors: []) var items: FetchedResults<Item>
     @FetchRequest(entity: LineInfo.entity(), sortDescriptors: []) var lines: FetchedResults<LineInfo>
+    ///
+    
     @State var showAlert = false
     @State private var busstopName = "" // 사용자로부터 입력 받을 버스 정류장 이름을 저장하는 상태 변수
     @State private var routeNumber = "" // 사용자로부터 입력 받을 노선 번호를 저장하는 상태 변수
@@ -99,24 +104,45 @@ struct ContentView: View {
                 .padding()
 
                 List {
-                    Section(header: Text("즐겨찾기")) {
-                        if wishList.isEmpty {
-                            Text("즐겨찾기를 등록해주세요")
-                                .foregroundColor(.gray)
-                                .italic()
-                        } else {
-                            ForEach(wishList.indices, id: \.self) { index in
-                                let wishItem = wishList[index]
-                                if let name = wishItem.busStopName {
-                                    if let nextName = wishItem.nextBusStop {
-                                        NavigationLink(destination: busInfoResult(busStopName: name, busStopID: Int(wishItem.busStopID), nextBusStop: nextName)) {
-                                            Text(name + " (" + nextName + ")")
+                    Section(header: Text(searchType == 0 ? "버스 정류장 즐겨찾기" : "버스 노선 즐겨찾기")) {
+                        if searchType == 0 {
+                            if wishList.isEmpty {
+                                Text("즐겨찾기를 등록해주세요")
+                                    .foregroundColor(.gray)
+                                    .italic()
+                            } else {
+                                ForEach(wishList.indices, id: \.self) { index in
+                                    let wishItem = wishList[index]
+                                    if let name = wishItem.busStopName {
+                                        if let nextName = wishItem.nextBusStop {
+                                            NavigationLink(destination: busInfoResult(busStopName: name, busStopID: Int(wishItem.busStopID), nextBusStop: nextName)) {
+                                                 VStack(alignment: .leading) {
+                                                     Text(name)
+                                                         .font(.headline)
+                                                     Text(nextName)
+                                                         .font(.subheadline)
+                                                         .foregroundColor(.gray)
+                                                 }
+                                            }
+                                        } else {
+                                            Text("Unknown")
                                         }
                                     } else {
                                         Text("Unknown")
                                     }
-                                } else {
-                                    Text("Unknown")
+                                }
+                            }
+                        } else {
+                            if wishListOfLine.isEmpty {
+                                Text("즐겨찾기를 등록해주세요")
+                                    .foregroundColor(.gray)
+                                    .italic()
+                            } else {
+                                ForEach(wishListOfLine.indices, id: \.self) { index in
+                                    let wishLine = wishListOfLine[index]
+                                    NavigationLink(destination: LineinfoView(LineID: Int(wishLine.lineID), Linename: wishLine.lineName ?? "", nowbusStopID: nil)) {
+                                        Text("\(wishLine.lineName ?? "Unknown") 번 버스")
+                                    }
                                 }
                             }
                         }
@@ -142,7 +168,11 @@ struct ContentView: View {
         for item in wishList {
             viewContext.delete(item)
         }
-
+        
+        for item in wishListOfLine {
+            viewContext.delete(item)
+        }
+        
         do {
             try viewContext.save()
         } catch {

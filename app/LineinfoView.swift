@@ -53,6 +53,8 @@ struct Location: Codable {
 }
 
 struct LineinfoView: View {
+    
+    @Environment(\.managedObjectContext) private var viewContext
     public var LineID: Int // 버스 ID 받아옴
     public var Linename: String
     public var nowbusStopID: Int?
@@ -143,15 +145,23 @@ struct LineinfoView: View {
                     }.toolbar {
                         ToolbarItemGroup(placement: .navigationBarTrailing) {
                             Spacer()
+                            
                             Menu {
                                 Button(action: {
-                                    showPDFViewer = true
-                                    // Linename 문자열을 정수로 변환하여 선택된 PDF 번호를 가져옴
+                                    saveToWishList()
                                 }) {
-                                    Text("시간표 보기")
+                                    Label("즐겨찾기", systemImage: "heart.fill")
                                 }
-                            }
-                            label: {
+                                .alert(isPresented: $showAlert) {
+                                    Alert(title: Text("알림"), message: Text(alertMessage), dismissButton: .default(Text("확인")))
+                                }
+                                
+                                Button(action: {
+                                    showPDFViewer = true
+                                }) {
+                                    Label("시간표 보기", systemImage: "calendar")
+                                }
+                            } label: {
                                 Image(systemName: "ellipsis.circle")
                             }
                             
@@ -173,7 +183,7 @@ struct LineinfoView: View {
                         }
                     }
                     .alert(isPresented: $showAlert) {
-                        Alert(title: Text("오류"), message: Text(alertMessage), dismissButton: .default(Text("확인")))
+                        Alert(title: Text("알림"), message: Text(alertMessage), dismissButton: .default(Text("확인")))
                     }
                     .padding(.horizontal, 16)
                     .listStyle(PlainListStyle())
@@ -193,7 +203,7 @@ struct LineinfoView: View {
                 } // else 종료
                 
             } // VStack 대괄호
-            .navigationBarTitle("\(Linename) 번 버스 위치 정보 ")
+            .navigationBarTitle("\(Linename)번 버스 위치 정보 ")
             .onAppear {
                 if networkMonitor.isConnected {
                     fetchLineData(for: LineID)
@@ -324,6 +334,50 @@ struct LineinfoView: View {
             }
         }.resume()
     }
+    
+    func saveToWishList() {
+        let fetchRequest: NSFetchRequest<WishListOfLine> = WishListOfLine.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "lineID == %d", LineID)
+        
+        do {
+            let existingWishList = try viewContext.fetch(fetchRequest)
+            
+            if let wishItem = existingWishList.first {
+                // 이미 해당 ID를 가진 항목이 있으면 삭제 여부를 확인
+                let confirmDeleteAlert = UIAlertController(title: "알림", message: "이 노선을 즐겨찾기에서 삭제하시겠습니까?", preferredStyle: .alert)
+                confirmDeleteAlert.addAction(UIAlertAction(title: "삭제", style: .destructive, handler: { _ in
+                    viewContext.delete(wishItem)
+                    showAlert = true
+                    alertMessage = "즐겨찾기에서 삭제되었습니다."
+                    
+                    do {
+                        try viewContext.save()
+                    } catch {
+                        print("Failed to save changes after deletion: \(error)")
+                    }
+                }))
+                confirmDeleteAlert.addAction(UIAlertAction(title: "취소", style: .cancel))
+                
+                // 현재 화면의 UIViewController를 가져와서 확인 메시지를 표시
+                if let viewController = UIApplication.shared.windows.first?.rootViewController {
+                    viewController.present(confirmDeleteAlert, animated: true)
+                }
+            } else {
+                // 해당 ID를 가진 항목이 없으면 추가
+                let newWishList = WishListOfLine(context: viewContext)
+                newWishList.lineID = Int32(LineID)
+                newWishList.lineName = Linename
+                showAlert = true
+                alertMessage = "즐겨찾기에 추가되었습니다."
+                
+                try viewContext.save() // 변경 내용을 저장합니다
+            }
+            
+        } catch {
+            print("Failed to fetch existing wishlist item: \(error)")
+        }
+    }
+
     
     private func findBusLocation(for busStopID: Int) -> Location? {
         return selectedLocation.first(where: { $0.busStopID == busStopID })
