@@ -20,4 +20,8 @@
         <attribute name="busStopName" optional="YES" attributeType="String"/>
         <attribute name="nextBusStop" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="WishListOfLine" representedClassName="WishListOfLine" syncable="YES" codeGenerationType="class">
+        <attribute name="lineID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="lineName" optional="YES" attributeType="String"/>
+    </entity>
 </model>
