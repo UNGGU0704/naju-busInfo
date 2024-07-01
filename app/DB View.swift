@@ -37,22 +37,17 @@ struct DBView: View {
             .listStyle(.plain)
             
             if isShowingButtons {
-                Button("정류장 데이터 가져오기") {
+                Button("데이터 갱신 ") {
+                    // Button 1의 동작
+                    print("Button 1 tapped")
                     fetchBusStopData()
                 }
                 .padding()
                 
-                Button("노선 데이터 가져오기") {
-                    fetchBusRouteData()
-                }.padding()
-                
-                Button("정류장 데이터 제거") {
-                    deleteExistingBusStops()
-                }
-                .padding()
-                
-                Button("노선 데이터 제거") {
-                    deleteExistingBusRoutes()
+                Button("데이터 제거") {
+                    // Button 2의 동작
+                    print("Button 2 tapped")
+                    deleteExistingData()
                 }
                 .padding()
             }
