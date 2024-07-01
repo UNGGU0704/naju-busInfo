@@ -5,10 +5,11 @@ import Foundation
 @main
 struct appApp: App {
     let persistenceController = PersistenceController.shared
+
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext,  persistenceController.container.viewContext)
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
@@ -22,52 +23,53 @@ struct ContentView: View {
     @State private var busstopName = "" // 사용자로부터 입력 받을 버스 정류장 이름을 저장하는 상태 변수
     @State private var routeNumber = "" // 사용자로부터 입력 받을 노선 번호를 저장하는 상태 변수
     @State private var searchType = 0 // 0: Bus Stop Name, 1: Route Number
+    @State private var navigate = false // 네비게이션 트리거 상태 변수
 
     var body: some View {
         NavigationView {
             VStack {
                 Picker("검색 방식", selection: $searchType) {
-                    Text("정류장 이름").tag(0).font(.headline)
-                    Text("노선 번호").tag(1).font(.headline)
+                    Text("정류장 이름").tag(0)
+                    Text("노선 번호").tag(1)
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding()
 
-                if searchType == 0 {
-                    TextField("버스 정류장을 입력하세요", text: $busstopName)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 10)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(Color(.systemGray6))
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color.black, lineWidth: 2)
-                                )
-                        )
-                        .accentColor(.black)
-                        .padding(.horizontal, 10)
-                } else {
-                    TextField("노선 번호를 입력하세요", text: $routeNumber)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 10)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(Color(.systemGray6))
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color.black, lineWidth: 2)
-                                )
-                        )
-                        .accentColor(.black)
-                        .padding(.horizontal, 10)
-                }
+                TextField(searchType == 0 ? "버스 정류장을 입력하세요" : "노선 번호를 입력하세요", text: searchType == 0 ? $busstopName : $routeNumber)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .foregroundColor(Color(.systemGray6))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.black, lineWidth: 2)
+                            )
+                    )
+                    .accentColor(.black)
+                    .padding(.horizontal, 10)
+                    .keyboardType(.webSearch)
+                    .onSubmit {
+                        navigate = true
+                    }
+                NavigationLink(
+                    destination: searchDestination(),
+                    isActive: $navigate,
+                    label: {
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.white) // Adjust image color if needed
+                            Text("검색")
+                                .foregroundColor(.white)
+                                .padding(.horizontal)
+                        }
+                        .padding()
+                        .background(Color.blue)
+                        .cornerRadius(15)
+                        .padding(.horizontal)
+                    }
+                )
 
-                NavigationLink(destination: searchType == 0 ?
-                               AnyView(SearchResultView(busstopName: $busstopName)) :
-                               AnyView(SearchLineResultView(busRouteNumber: $routeNumber))) {
-                    Text("검색")
-                }
                 .toolbar {
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
                         Spacer()
@@ -76,7 +78,7 @@ struct ContentView: View {
                             Button(action: {
                                 deleteAllWishListItems()
                             }) {
-                                Label("즐겨찾기 전체 삭제", systemImage: "function1")
+                                Label("즐겨찾기 전체 삭제", systemImage: "trash.circle")
                             }
 
                         } label: {
@@ -154,8 +156,18 @@ struct ContentView: View {
             showAlert = true
         }
     }
-    
+
+    @ViewBuilder
+    private func searchDestination() -> some View {
+        if searchType == 0 {
+            SearchResultView(busstopName: $busstopName)
+        } else {
+            SearchLineResultView(busRouteNumber: $routeNumber)
+        }
+    }
+
     private func getNavigationTitle() -> String {
         return searchType == 0 ? "정류장으로 검색" : "버스번호로 검색"
     }
 }
+

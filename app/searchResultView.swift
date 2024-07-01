@@ -90,6 +90,15 @@ struct busInfoResult: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
+                            saveToWishList()
+                        }) {
+                            Image(systemName: "heart.fill")
+                        }.alert(isPresented: $showAlert) {
+                            Alert(title: Text("알림"), message: Text(alertMessage), dismissButton: .default(Text("확인")))
+                        }
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
                             isRotating.toggle()
                             fetchData(for: busStopID)
                         }) {
@@ -97,16 +106,6 @@ struct busInfoResult: View {
                                 .rotationEffect(.degrees(isRotating ? 360 : 0))
                                 .animation(.easeInOut(duration: 0.5), value: isRotating)
                         }
-                    }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            saveToWishList()
-                        }) {
-                            Image(systemName: "heart.fill")
-                        }.alert(isPresented: $showAlert) {
-                            Alert(title: Text("알림"), message: Text(alertMessage), dismissButton: .default(Text("확인")))
-                        }
-                        
                     }
                 }
             }
