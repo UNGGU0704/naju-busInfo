@@ -150,7 +150,7 @@ struct LineinfoView: View {
                                 Button(action: {
                                     saveToWishList()
                                 }) {
-                                    Label("즐겨찾기 추가", systemImage: "heart.fill")
+                                    Label("즐겨찾기", systemImage: "heart.fill")
                                 }
                                 .alert(isPresented: $showAlert) {
                                     Alert(title: Text("알림"), message: Text(alertMessage), dismissButton: .default(Text("확인")))
@@ -183,7 +183,7 @@ struct LineinfoView: View {
                         }
                     }
                     .alert(isPresented: $showAlert) {
-                        Alert(title: Text("오류"), message: Text(alertMessage), dismissButton: .default(Text("확인")))
+                        Alert(title: Text("알림"), message: Text(alertMessage), dismissButton: .default(Text("확인")))
                     }
                     .padding(.horizontal, 16)
                     .listStyle(PlainListStyle())
@@ -203,7 +203,7 @@ struct LineinfoView: View {
                 } // else 종료
                 
             } // VStack 대괄호
-            .navigationBarTitle("\(Linename) 번 버스 위치 정보 ")
+            .navigationBarTitle("\(Linename)번 버스 위치 정보 ")
             .onAppear {
                 if networkMonitor.isConnected {
                     fetchLineData(for: LineID)
