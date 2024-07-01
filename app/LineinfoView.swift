@@ -343,10 +343,25 @@ struct LineinfoView: View {
             let existingWishList = try viewContext.fetch(fetchRequest)
             
             if let wishItem = existingWishList.first {
-                // 이미 해당 ID를 가진 항목이 있으면 삭제
-                viewContext.delete(wishItem)
-                showAlert = true
-                alertMessage = "즐겨찾기에서 삭제되었습니다."
+                // 이미 해당 ID를 가진 항목이 있으면 삭제 여부를 확인
+                let confirmDeleteAlert = UIAlertController(title: "알림", message: "이 노선을 즐겨찾기에서 삭제하시겠습니까?", preferredStyle: .alert)
+                confirmDeleteAlert.addAction(UIAlertAction(title: "삭제", style: .destructive, handler: { _ in
+                    viewContext.delete(wishItem)
+                    showAlert = true
+                    alertMessage = "즐겨찾기에서 삭제되었습니다."
+                    
+                    do {
+                        try viewContext.save()
+                    } catch {
+                        print("Failed to save changes after deletion: \(error)")
+                    }
+                }))
+                confirmDeleteAlert.addAction(UIAlertAction(title: "취소", style: .cancel))
+                
+                // 현재 화면의 UIViewController를 가져와서 확인 메시지를 표시
+                if let viewController = UIApplication.shared.windows.first?.rootViewController {
+                    viewController.present(confirmDeleteAlert, animated: true)
+                }
             } else {
                 // 해당 ID를 가진 항목이 없으면 추가
                 let newWishList = WishListOfLine(context: viewContext)
@@ -354,13 +369,15 @@ struct LineinfoView: View {
                 newWishList.lineName = Linename
                 showAlert = true
                 alertMessage = "즐겨찾기에 추가되었습니다."
+                
+                try viewContext.save() // 변경 내용을 저장합니다
             }
             
-            try viewContext.save() // 변경 내용을 저장합니다
         } catch {
-            print("Failed to save wishlist item: \(error)")
+            print("Failed to fetch existing wishlist item: \(error)")
         }
     }
+
     
     private func findBusLocation(for busStopID: Int) -> Location? {
         return selectedLocation.first(where: { $0.busStopID == busStopID })
