@@ -168,7 +168,11 @@ struct ContentView: View {
         for item in wishList {
             viewContext.delete(item)
         }
-
+        
+        for item in wishListOfLine {
+            viewContext.delete(item)
+        }
+        
         do {
             try viewContext.save()
         } catch {
