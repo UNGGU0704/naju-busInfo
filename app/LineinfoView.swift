@@ -53,6 +53,8 @@ struct Location: Codable {
 }
 
 struct LineinfoView: View {
+    
+    @Environment(\.managedObjectContext) private var viewContext
     public var LineID: Int // 버스 ID 받아옴
     public var Linename: String
     public var nowbusStopID: Int?
@@ -143,15 +145,23 @@ struct LineinfoView: View {
                     }.toolbar {
                         ToolbarItemGroup(placement: .navigationBarTrailing) {
                             Spacer()
+                            
                             Menu {
                                 Button(action: {
-                                    showPDFViewer = true
-                                    // Linename 문자열을 정수로 변환하여 선택된 PDF 번호를 가져옴
+                                    saveToWishList()
                                 }) {
-                                    Text("시간표 보기")
+                                    Label("즐겨찾기 추가", systemImage: "heart.fill")
                                 }
-                            }
-                            label: {
+                                .alert(isPresented: $showAlert) {
+                                    Alert(title: Text("알림"), message: Text(alertMessage), dismissButton: .default(Text("확인")))
+                                }
+                                
+                                Button(action: {
+                                    showPDFViewer = true
+                                }) {
+                                    Label("시간표 보기", systemImage: "calendar")
+                                }
+                            } label: {
                                 Image(systemName: "ellipsis.circle")
                             }
                             
