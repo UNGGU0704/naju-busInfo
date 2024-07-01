@@ -325,6 +325,33 @@ struct LineinfoView: View {
         }.resume()
     }
     
+    func saveToWishList() {
+        let fetchRequest: NSFetchRequest<WishListOfLine> = WishListOfLine.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "lineID == %d", LineID)
+        
+        do {
+            let existingWishList = try viewContext.fetch(fetchRequest)
+            
+            if let wishItem = existingWishList.first {
+                // 이미 해당 ID를 가진 항목이 있으면 삭제
+                viewContext.delete(wishItem)
+                showAlert = true
+                alertMessage = "즐겨찾기에서 삭제되었습니다."
+            } else {
+                // 해당 ID를 가진 항목이 없으면 추가
+                let newWishList = WishListOfLine(context: viewContext)
+                newWishList.lineID = Int32(LineID)
+                newWishList.lineName = Linename
+                showAlert = true
+                alertMessage = "즐겨찾기에 추가되었습니다."
+            }
+            
+            try viewContext.save() // 변경 내용을 저장합니다
+        } catch {
+            print("Failed to save wishlist item: \(error)")
+        }
+    }
+    
     private func findBusLocation(for busStopID: Int) -> Location? {
         return selectedLocation.first(where: { $0.busStopID == busStopID })
     }
