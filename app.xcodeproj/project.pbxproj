@@ -18,13 +18,14 @@
 		6E40ABD02A1C60F3009AD3E8 /* appUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E40ABCF2A1C60F3009AD3E8 /* appUITestsLaunchTests.swift */; };
 		6E40ABDD2A1C6211009AD3E8 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E40ABDC2A1C6211009AD3E8 /* DB.swift */; };
 		6E4539AD2A3DDEE1000EFEB3 /* searchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4539AC2A3DDEE1000EFEB3 /* searchResultView.swift */; };
+		6E5EDF4D2C2023D3004F8F61 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5EDF4C2C2023D3004F8F61 /* NetworkMonitor.swift */; };
 		6E8778B22A40F9500011DF22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E40ABB12A1C60F3009AD3E8 /* Assets.xcassets */; };
 		6E9218512A288D6300877C36 /* searchBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC8C65E2A2222EF00AE86A2 /* searchBus.swift */; };
 		6E9218522A288D6300877C36 /* searchBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC8C65E2A2222EF00AE86A2 /* searchBus.swift */; };
 		6E9218532A288D7000877C36 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E40ABDC2A1C6211009AD3E8 /* DB.swift */; };
 		6E9218542A288D7100877C36 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E40ABDC2A1C6211009AD3E8 /* DB.swift */; };
+		6EBB84592BA5E85200EE1395 /* PDFViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBB84582BA5E85200EE1395 /* PDFViewer.swift */; };
 		6EC8C65F2A2222EF00AE86A2 /* searchBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC8C65E2A2222EF00AE86A2 /* searchBus.swift */; };
-		6ED57FEB2A2705FA004091EF /* BusstopInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED57FEA2A2705FA004091EF /* BusstopInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		6E1B7DDA2A404CAA001B3406 /* DB View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DB View.swift"; sourceTree = "<group>"; };
+		6E1D58332AFC789B00CAE257 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6E2CCE0E2A67F1FF00BB996B /* LineinfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineinfoView.swift; sourceTree = "<group>"; };
 		6E40ABAA2A1C60F1009AD3E8 /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E40ABAF2A1C60F1009AD3E8 /* Main View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Main View.swift"; sourceTree = "<group>"; };
@@ -60,8 +62,9 @@
 		6E40ABCF2A1C60F3009AD3E8 /* appUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = appUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		6E40ABDC2A1C6211009AD3E8 /* DB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB.swift; sourceTree = "<group>"; };
 		6E4539AC2A3DDEE1000EFEB3 /* searchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchResultView.swift; sourceTree = "<group>"; };
+		6E5EDF4C2C2023D3004F8F61 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		6EBB84582BA5E85200EE1395 /* PDFViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewer.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		6EC8C65E2A2222EF00AE86A2 /* searchBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchBus.swift; sourceTree = "<group>"; };
-		6ED57FEA2A2705FA004091EF /* BusstopInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusstopInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +115,7 @@
 		6E40ABAC2A1C60F1009AD3E8 /* app */ = {
 			isa = PBXGroup;
 			children = (
+				6E1D58332AFC789B00CAE257 /* Info.plist */,
 				6E40ABAF2A1C60F1009AD3E8 /* Main View.swift */,
 				6E40ABDC2A1C6211009AD3E8 /* DB.swift */,
 				6EC8C65E2A2222EF00AE86A2 /* searchBus.swift */,
@@ -119,10 +123,11 @@
 				6E40ABB12A1C60F3009AD3E8 /* Assets.xcassets */,
 				6E40ABB82A1C60F3009AD3E8 /* app.xcdatamodeld */,
 				6E40ABB32A1C60F3009AD3E8 /* Preview Content */,
-				6ED57FEA2A2705FA004091EF /* BusstopInfo.swift */,
 				6E4539AC2A3DDEE1000EFEB3 /* searchResultView.swift */,
 				6E1B7DDA2A404CAA001B3406 /* DB View.swift */,
 				6E2CCE0E2A67F1FF00BB996B /* LineinfoView.swift */,
+				6EBB84582BA5E85200EE1395 /* PDFViewer.swift */,
+				6E5EDF4C2C2023D3004F8F61 /* NetworkMonitor.swift */,
 			);
 			path = app;
 			sourceTree = "<group>";
@@ -216,7 +221,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					6E40ABA92A1C60F1009AD3E8 = {
 						CreatedOnToolsVersion = 14.3;
@@ -282,13 +287,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EBB84592BA5E85200EE1395 /* PDFViewer.swift in Sources */,
 				6EC8C65F2A2222EF00AE86A2 /* searchBus.swift in Sources */,
 				6E1B7DDB2A404CAA001B3406 /* DB View.swift in Sources */,
 				6E4539AD2A3DDEE1000EFEB3 /* searchResultView.swift in Sources */,
 				6E40ABB72A1C60F3009AD3E8 /* Persistence.swift in Sources */,
-				6ED57FEB2A2705FA004091EF /* BusstopInfo.swift in Sources */,
 				6E40ABBA2A1C60F3009AD3E8 /* app.xcdatamodeld in Sources */,
 				6E40ABB02A1C60F1009AD3E8 /* Main View.swift in Sources */,
+				6E5EDF4D2C2023D3004F8F61 /* NetworkMonitor.swift in Sources */,
 				6E2CCE0F2A67F1FF00BB996B /* LineinfoView.swift in Sources */,
 				6E40ABDD2A1C6211009AD3E8 /* DB.swift in Sources */,
 			);
@@ -368,6 +374,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -383,7 +390,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "나주 버스";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -430,6 +437,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -439,7 +447,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "나주 버스";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -454,22 +462,26 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"app/Preview Content\"";
 				DEVELOPMENT_TEAM = 25CB28NX5R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = app/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "나주 버스";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = NO;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.xoul.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -483,22 +495,26 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"app/Preview Content\"";
 				DEVELOPMENT_TEAM = 25CB28NX5R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = app/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "나주 버스";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = NO;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.xoul.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
