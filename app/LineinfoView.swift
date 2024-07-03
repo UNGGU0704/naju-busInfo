@@ -359,9 +359,12 @@ struct LineinfoView: View {
                 confirmDeleteAlert.addAction(UIAlertAction(title: "취소", style: .cancel))
                 
                 // 현재 화면의 UIViewController를 가져와서 확인 메시지를 표시
-                if let viewController = UIApplication.shared.windows.first?.rootViewController {
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let window = windowScene.windows.first,
+                   let viewController = window.rootViewController {
                     viewController.present(confirmDeleteAlert, animated: true)
                 }
+
             } else {
                 // 해당 ID를 가진 항목이 없으면 추가
                 let newWishList = WishListOfLine(context: viewContext)
