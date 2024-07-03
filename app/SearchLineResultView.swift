@@ -24,7 +24,7 @@ struct SearchLineResultView: View {
                     if let lineName = item.lineName{
                         NavigationLink(destination: LineinfoView(LineID: lineID, Linename: lineName, nowbusStopID: 99999)) {
                             HStack {
-                                if lineName.contains("99") || lineName.contains("좌석") || lineName.contains("160") || lineName.contains("161") {
+                                if lineName.contains("99") {
                                     VStack(alignment: .center, spacing: 5) {
                                         Image(systemName: "bus")
                                             .font(.title)
@@ -32,15 +32,24 @@ struct SearchLineResultView: View {
                                         Text(" \(lineName)")
                                             .font(.headline)
                                     }
-                                } else if lineName.contains("99") {
-                                    VStack(alignment: .leading, spacing: 5) {
+                                } else if lineName.contains("셔틀") || lineName.contains("우정") || lineName.contains("그린") {
+                                    VStack(alignment: .center, spacing: 5) {
                                         Image(systemName: "bus")
                                             .font(.title)
                                             .foregroundColor(.green)
                                         Text(" \(lineName)")
                                             .font(.headline)
                                     }
-                                } else {
+                                }else if lineName.contains("급행") || lineName.contains("좌석")  {
+                                    VStack(alignment: .center, spacing: 5) {
+                                        Image(systemName: "bus")
+                                            .font(.title)
+                                            .foregroundColor(.red)
+                                        Text(" \(lineName)")
+                                            .font(.headline)
+                                    }
+                                }
+                                 else {
                                     VStack(alignment: .leading, spacing: 5) {
                                         Image(systemName: "bus")
                                             .font(.title)

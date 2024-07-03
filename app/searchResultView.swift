@@ -54,11 +54,16 @@ struct busInfoResult: View {
                             Image(systemName: "bus")
                                 .font(.title)
                                 .foregroundColor(.green)
-                        } else if lineInfo.lineName.contains("99") || lineInfo.lineName.contains("좌석") ||
+                        } else if lineInfo.lineName.contains("99") ||
                                     lineInfo.lineName.contains("160") || lineInfo.lineName.contains("161"){
                             Image(systemName: "bus")
                                 .font(.title)
                                 .foregroundColor(.purple)
+                        } else if lineInfo.lineName.contains("급행") || lineInfo.lineName.contains("좌석")  {
+                            Image(systemName: "bus")
+                                .font(.title)
+                                .foregroundColor(.red)
+                                .frame(width: 30)
                         } else {
                             Image(systemName: "bus")
                                 .font(.title)

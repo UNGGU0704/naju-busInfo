@@ -86,12 +86,17 @@ struct LineinfoView: View {
                                                 .font(.title)
                                                 .foregroundColor(.green)
                                                 .frame(width: 30) // 버스 그림의 너비를 지정해줍니다.
-                                        } else if Linename.contains("99") || Linename.contains("좌석") ||
+                                        } else if Linename.contains("99") ||
                                                     Linename.contains("161") || Linename.contains("160") {
                                             Image(systemName: "bus")
                                                 .font(.title)
                                                 .foregroundColor(.purple)
                                                 .frame(width: 30) // 버스 그림의 너비를 지정해줍니다.
+                                        }  else if Linename.contains("급행") || Linename.contains("좌석")  {
+                                            Image(systemName: "bus")
+                                                .font(.title)
+                                                .foregroundColor(.red)
+                                                .frame(width: 30)
                                         } else {
                                             Image(systemName: "bus")
                                                 .font(.title)
