@@ -24,7 +24,8 @@ struct SearchLineResultView: View {
                     if let lineName = item.lineName{
                         NavigationLink(destination: LineinfoView(LineID: lineID, Linename: lineName, nowbusStopID: 99999)) {
                             HStack {
-                                if lineName.contains("99") {
+                                if lineName.contains("99") || lineName.contains("161")
+                                    || lineName.contains("160"){
                                     VStack(alignment: .center, spacing: 5) {
                                         Image(systemName: "bus")
                                             .font(.title)
