@@ -6,7 +6,7 @@
    <a href="https://developer.apple.com/swift/">
       <img src="https://img.shields.io/badge/Swift-5.8-orange.svg?style=flat" alt="Swift 5.8">
    </a>
-   <img src="https://img.shields.io/badge/iOS-16%2B-brightgreen.svg?style=flat" alt="iOS 16+ Compatible">
+   <img src="https://img.shields.io/badge/iOS-17%2B-brightgreen.svg?style=flat" alt="iOS 17+ Compatible">
 
 <br>
 <a href="https://apps.apple.com/kr/app/나주시-버스/id6459411077">
@@ -15,14 +15,14 @@
 </p>
 
 
-# 나주시 버스(Naju Bus)
-나주시 시민들을 위한 버스 도착 정보를 제공하는 어플로써 버스 정류장을 검색하고 버스 도착까지 남은 시간을 알려주는 기능을 제공합니다.
+# 나주 버스(Naju Bus)
+나주 버스 정보를 제공하는 어플로써 버스 정류장 및 노선을 검색하고 버스 도착까지 남은 시간과 노선의 현재 위치를 알려주는 기능을 제공합니다.
 
-## App Store
+## :rocket: 배포(Deploy)
 
 https://apps.apple.com/kr/app/나주시-버스/id6459411077
 
-## 기능(Features)
+## :dart: 기능(Features)
 
 - [x] ℹ️ 정류장 데이터 부착
 - [x] ℹ️ 정류장 검색
@@ -33,26 +33,22 @@ https://apps.apple.com/kr/app/나주시-버스/id6459411077
 - [x] ℹ️ 노선별 버스 시간표 제공
 - [ ] ℹ️ 노선 검색 제공
 
-## 사용(Usage)
-| 정류장 검색 | 도착 정보 표시 |
+## :black_square_button: 사용(Usage)
+| 메인 화면 | 버스 정보 |
 | :---: | :---: |
-| <img src = "https://github.com/unggu0704/naju-busInfo/assets/130115689/e10a534a-be2a-426f-b29c-1cfd3e270c4a" width="200" align="center"> | <img src="https://github.com/unggu0704/naju-busInfo/assets/130115689/572b68cc-d38b-4c8b-b377-9bede7218ede" width="200" align="center"> |
-| **즐겨찾기 관리** | **노선 정보, 시간표 표시** |
-| <img src="https://github.com/unggu0704/naju-busInfo/assets/130115689/714fcf1e-faab-4046-bceb-f3baca8752c4" width="200" align="center"> | <img src="https://github.com/unggu0704/naju-busInfo/assets/130115689/4dd74a65-5607-4634-9aaf-1db58f5a5ad8" width="200" align="center"> |
+| <img src = "img/iphone14 plus/newbusmain.png" width="200" align="center"> | <img src="img/iphone14 plus/busStopInfo.png" width="200" align="center"> |
+| **노선 정보** | **현재 위치** |
+| <img src="img/iphone14 plus/linesearch.png" width="200" align="center"> | <img src="img/iphone14 plus/busLineInfo.png" width="200" align="center"> |
 
-<img width="69" alt="스크린샷 2023-06-20 오후 11 36 52" src="https://github.com/UNGGU0704/Naju_busInfo/assets/130115689/16bc9a8a-7a9a-465f-929f-0b5c934b83f2">
+## :white_check_mark: 업데이트 기록 (Update)
 
-**일반버스 아이콘입니다.**
-
- <img width="72" alt="스크린샷 2023-06-20 오후 11 36 55" src="https://github.com/UNGGU0704/Naju_busInfo/assets/130115689/1c51798c-ba76-44d8-81cf-dbb040da5be0"> 
-
- **광역버스 아이콘입니다.**
-
-<img width="71" alt="스크린샷 2023-06-20 오후 11 36 48" src="https://github.com/UNGGU0704/Naju_busInfo/assets/130115689/caca8c69-22c0-4fef-88a7-dc99568603d7">
-
-**마을버스 아이콘입니다.**
-
-## 업데이트 기록
+### 1.4
+- **노선 검색 기능 추가**
+- 노선 즐겨찾기 기능 추가
+- 예외 처리에 따른 사용자 view 제공
+- 네트워크 감지 코드 추가
+- 잘못된 시간표를 수정
+- 서비스 개선 
 
 ### 1.3
 - 즐겨찾기 Button 클릭시 alert창이 안보이는 버그를 해결 #issue #23
@@ -82,12 +78,14 @@ https://apps.apple.com/kr/app/나주시-버스/id6459411077
 
 #### `Main View.swift`
 - 앱 실행시 보이는 메인 화면입니다. 
-  버스 정류장을 검색하는 기능을 가지고 있습니다.
+  버스 정류장 또는 노선 정보를 검색하는 기능을 가지고 있습니다.
 #### `searchBus.swift`
 - 정류장 정보를 검색하는 기능을 가지고 있습니다.
 #### `searchResultView.swift`
 - 버스 정류장 이름을 기반으로 CoreData에서 정류장 정보를 검색하고 
   해당 정류장의 도착 정보를 표시하는 기능을 가지고 있습니다.
+#### `searchLineResultView.swift`
+- 적절한 노선 정보를 coredata에서 불러와 표시합니다.
 #### `LineinfoView.swift`
 - 해당 노선이 지나가는 모든 버스 정류장을 보여줍니다. 
   추가적으로 해당 노선이 현재 어디 있는지 또한 보여줍니다.
