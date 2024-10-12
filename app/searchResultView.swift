@@ -12,14 +12,12 @@ struct busInfoResult: View {
     @State private var showAlert: Bool = false
     @State private var alertMessage: String = ""
     @State private var isRotating = false
-    @EnvironmentObject var loadingState: LoadingState //로딩 상태 환경 변수
+    @State private var isLoading = false
     
     
     var body: some View {
-        VStack(alignment: .leading) {
-            if false {
-                LoadingView()
-            } else {
+        ZStack {
+            VStack(alignment: .leading) {
                 Section(header: HStack {
                     Text(busStopName)
                         .font(.custom("NotoSans-Bold", size: 24))
@@ -120,15 +118,14 @@ struct busInfoResult: View {
                     }
                 }
             }
-            
-            
+            if isLoading {
+                LoadingView()
+            }
         }
         .onAppear(){
-            loadingState.isLoading = true
-            print(loadingState.isLoading);
             fetchData(for: busStopID)
-            loadingState.isLoading = false
         }
+
     }
     
     
@@ -164,48 +161,70 @@ struct busInfoResult: View {
     
     
     public func fetchData(for busStopID: Int) {
+        DispatchQueue.main.async {
+            isLoading = true
+        }
         
-        // Construct the URL for the API request
         guard var urlComponents = URLComponents(string: "http://121.147.206.212/json/arriveApi") else {
-            print("Invalid URL")
+            DispatchQueue.main.async {
+                isLoading = false
+                alertMessage = "잘못된 URL입니다."
+                showAlert = true
+            }
             return
         }
         
-        urlComponents.queryItems = [        URLQueryItem(name: "BUSSTOP_ID", value: "\(busStopID)")    ]
-        print("API 요청 사이트: " + "\(urlComponents)")
+        urlComponents.queryItems = [URLQueryItem(name: "BUSSTOP_ID", value: "\(busStopID)")]
+        
         guard let url = urlComponents.url else {
-            print("Invalid URL")
+            DispatchQueue.main.async {
+                isLoading = false
+                alertMessage = "URL 생성에 실패했습니다."
+                showAlert = true
+            }
             return
         }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
+            defer {
+                DispatchQueue.main.async {
+                    isLoading = false
+                }
+            }
+            
             if let error = error {
-                print("Error fetching data: \(error.localizedDescription)")
-                alertMessage = "\(error.localizedDescription)"
-                showAlert = true
+                DispatchQueue.main.async {
+                    alertMessage = "데이터를 불러오는 중 오류 발생: \(error.localizedDescription)"
+                    showAlert = true
+                }
                 return
             }
             
             guard let data = data else {
-                print("No data received")
+                DispatchQueue.main.async {
+                    alertMessage = "받은 데이터가 없습니다."
+                    showAlert = true
+                }
                 return
             }
             
             do {
                 let apiResponse = try JSONDecoder().decode(ApiResponse.self, from: data)
-                let decodedArrivals = apiResponse.arriveList
-                
                 DispatchQueue.main.async {
-                    if decodedArrivals.isEmpty {
-                        print("No bus arrivals found for bus stop ID: \(busStopID)")
+                    if apiResponse.arriveList.isEmpty {
+                        alertMessage = "해당 정류장에 도착 예정인 버스가 없습니다."
+                        showAlert = true
                     } else {
-                        self.selectedArrival = decodedArrivals  // 첫 번째 도착 정보를 선택
+                        selectedArrival = apiResponse.arriveList
                     }
                 }
             } catch {
-                print("Error decoding JSON data: \(error)")
+                DispatchQueue.main.async {
+                    alertMessage = "JSON 데이터를 파싱하는 중 오류가 발생했습니다: \(error.localizedDescription)"
+                    showAlert = true
+                }
             }
         }.resume()
-        
     }
+
 }
