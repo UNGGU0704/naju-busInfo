@@ -29,7 +29,6 @@ struct busInfoResult: View {
                     .padding(.trailing, 38) // 오른쪽 여백 추가
                     .padding(.bottom, -10)
             }.padding(.bottom, -5)
-                .padding(.top, -25)
             ) {
                 
                 //정류장 정보가 아무것도 없을때 표시
