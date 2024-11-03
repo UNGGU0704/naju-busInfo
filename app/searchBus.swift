@@ -77,7 +77,10 @@ public struct SearchResultView: View {
             searchBusStopNames(by: busstopName)
         }
         
-        
+        // 광고 배너 추가
+          BannerAdView()
+              .frame(width: 320, height: 50)
+              .padding(.top)
         
     }
     
