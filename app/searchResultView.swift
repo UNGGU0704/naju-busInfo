@@ -114,9 +114,19 @@ struct busInfoResult: View {
                                     .animation(.easeInOut(duration: 0.5), value: isRotating)
                             }
                         }
+                        
                     }
                 }
+                // 광고 배너 추가 (VStack 하단에 배치)
+                    HStack {
+                        Spacer() // 좌측 여백을 위해 Spacer 추가
+                        BannerAdView()
+                            .frame(width: 320, height: 50)
+                            .padding(.top)
+                        Spacer() // 우측 여백을 위해 Spacer 추가
+                    }
             }
+
             if isLoading {
                 LoadingView()
             }
